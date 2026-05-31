@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0e17,50:0099bb,100:00d9ff&height=120&section=header&text=Trịnh%20Hữu%20Kiến%20Quốc&fontSize=32&fontColor=ffffff&fontAlignY=65&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:006080,50:0099bb,100:00d9ff&height=140&section=header&text=Trịnh%20Hữu%20Kiến%20Quốc&fontSize=32&fontColor=ffffff&fontAlignY=60&desc=Cloud%20%2F%20DevOps%20Engineer&descSize=14&descAlignY=80&descAlign=50&animation=fadeIn" width="100%"/>
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=14&duration=2800&pause=1200&color=00D9FF&center=true&vCenter=true&width=600&lines=Cloud+%2F+DevOps+Engineer+in+progress...;Infrastructure+as+Code+%E2%86%92+Production;Automate+Everything+%7C+Document+Clearly+%7C+Scale+Without+Limits)](https://git.io/typing-svg)
 
