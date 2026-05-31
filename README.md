@@ -4,6 +4,8 @@
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=14&duration=2800&pause=1200&color=00D9FF&center=true&vCenter=true&width=600&lines=Cloud+%2F+DevOps+Engineer+in+progress...;Infrastructure+as+Code+%E2%86%92+Production;Automate+Everything+%7C+Document+Clearly+%7C+Scale+Without+Limits)](https://git.io/typing-svg)
 
+**[🌐 View My Personal Portfolio](https://introquozai22.netlify.app/)**
+
 </div>
 
 ---
@@ -16,7 +18,6 @@ major    : Mạng máy tính & Truyền thông dữ liệu
 focus    : DevOps · Cloud Infrastructure · System Engineering
 goal     : Cloud-Native Architecture & Graduate School Preparation
 status   : 🟢 Open to — DevOps/Cloud Intern · Software Engineer
-intro    : https://introquozai22.netlify.app/
 ```
 
 > Coi **Infrastructure as Code (IaC)** và **Automation** là trụ cột cốt lõi.
