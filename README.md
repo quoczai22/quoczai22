@@ -17,7 +17,6 @@ name     : Trịnh Hữu Kiến Quốc
 major    : Mạng máy tính & Truyền thông dữ liệu
 focus    : DevOps · Cloud Infrastructure · System Engineering
 goal     : Cloud-Native Architecture & Graduate School Preparation
-portfolio : [https://introquozai22.netlify.app/](https://introquozai22.netlify.app/)
 status   : 🟢 Open to — DevOps/Cloud Intern · Software Engineer
 ```
 
