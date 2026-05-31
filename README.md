@@ -1,12 +1,8 @@
 <div align="center">
 
-```
-╔══════════════════════════════════════════════════════════════╗
-║          TRỊNH HỮU KIẾN QUỐC  ·  Cloud / DevOps Engineer    ║
-╚══════════════════════════════════════════════════════════════╝
-```
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0e17,50:0099bb,100:00d9ff&height=120&section=header&text=Trịnh%20Hữu%20Kiến%20Quốc&fontSize=32&fontColor=ffffff&fontAlignY=65&animation=fadeIn" width="100%"/>
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=16&pause=1000&color=00D9FF&center=true&vCenter=true&width=600&lines=Infrastructure+as+Code+%E2%86%92+Production;Automate+Everything+%7C+Document+Clearly;Scale+Without+Limits+%F0%9F%9A%80)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=14&duration=2800&pause=1200&color=00D9FF&center=true&vCenter=true&width=600&lines=Cloud+%2F+DevOps+Engineer+in+progress...;Infrastructure+as+Code+%E2%86%92+Production;Automate+Everything+%7C+Document+Clearly+%7C+Scale+Without+Limits)](https://git.io/typing-svg)
 
 </div>
 
@@ -18,81 +14,88 @@
 name     : Trịnh Hữu Kiến Quốc
 major    : Mạng máy tính & Truyền thông dữ liệu
 focus    : DevOps · Cloud Infrastructure · System Engineering
-goal     : Cloud/DevOps Engineer → Cloud-Native Architecture
-status   : 🟢 Open to DevOps/Cloud Internship & SWE Roles
+goal     : Cloud-Native Architecture & Graduate School Preparation
+status   : 🟢 Open to — DevOps/Cloud Intern · Software Engineer
 ```
 
-> Mình coi **Infrastructure as Code** và **Automation** là trụ cột cốt lõi.  
-> Hướng đến hệ thống **High Availability**, bảo mật vững chắc, và cầu nối liền mạch giữa Dev ↔ Ops.
+> Coi **Infrastructure as Code (IaC)** và **Automation** là trụ cột cốt lõi.
+> Hướng đến hệ thống **High Availability**, bảo mật vững chắc,
+> và cầu nối liền mạch giữa quá trình phát triển ↔ vận hành.
 
 ---
 
 ## `$ cat tech-stack.yaml`
 
 ```yaml
-☁️  Cloud & Infrastructure:
-      Platforms   : AWS · VNG Cloud · Green Node
-      Containers  : Kubernetes (K8s) · Docker
-      Automation  : CI/CD Pipelines · GitHub Actions
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ☁  Cloud & Infrastructure
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+platforms   : [AWS, VNG Cloud, Green Node]
+containers  : [Kubernetes (K8s), Docker]
+automation  : [CI/CD Pipelines, GitHub Actions]
 
-💻  Languages & Scripting:
-      Systems     : C++ · Java · Python
-      Mobile      : Kotlin
-      Data/Query  : SQL · T-SQL
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  { }  Languages & Scripting
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+systems     : [C++, Java, Python]
+mobile      : [Kotlin]
+query       : [SQL, T-SQL]
 
-🏗️  Frameworks & Architecture:
-      Desktop UI  : WPF (MVVM pattern)
-      Mobile      : Android Native (Kotlin)
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ⬚  Frameworks & Architecture
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+desktop     : WPF (MVVM pattern)
+mobile      : Android Native (Kotlin)
 
-🗄️  Backend & Databases:
-      RDBMS       : PostgreSQL · MS SQL Server
-
-🤖  AI & Productivity Tools:
-      Tooling     : GitHub Copilot · Google AI Studio · ChatGPT Plus
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  ⬡  Backend & AI Tooling
+#━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+databases   : [PostgreSQL, MS SQL Server]
+ai_tools    : [GitHub Copilot, Google AI Studio, ChatGPT Plus]
 ```
 
 ---
 
-## `$ git log --projects`
+## `$ git log --projects --oneline`
 
-### 🔷 Bootcamp Nhân lực Cloud — FCAJ
 ```
-domain   : Cloud Engineering
-focus    : Provisioning tài nguyên AWS & thiết kế kiến trúc ứng dụng
-platform : Amazon Web Services (EC2, S3, VPC, IAM, ...)
-```
+◈  [01]  Bootcamp Nhân lực Cloud — FCAJ
+         domain   : Cloud Engineering
+         platform : Amazon Web Services (EC2 · S3 · VPC · IAM)
+         focus    : Provisioning tài nguyên & thiết kế kiến trúc ứng dụng thực tế
 
-### 🔷 NAVER Vietnam AI Hackathon
-```
-track    : Mobile Android
-stack    : Kotlin + Smart API Integrations
-note     : Hoàn thành trong giới hạn thời gian nghiêm ngặt của hackathon
+◈  [02]  NAVER Vietnam AI Hackathon
+         track    : Mobile Android
+         stack    : Kotlin + Smart API Integrations
+         outcome  : Hoàn thành sản phẩm trong giới hạn thời gian nghiêm ngặt
 ```
 
 ---
 
-## `$ ls ./certifications`
+## `$ ls -la ./certifications/`
 
 ```
-📁 certifications/
-├── 🥇  Gemini Certified University Student
-│         └── Issued by: Google for Education Certification Team
-│         └── Scope   : AI Tools & Workflows
+drwxr-xr-x  certifications/
+├── [✓]  Gemini Certified University Student
+│         issuer : Google for Education Certification Team
+│         scope  : AI Tools & Workflows
+│         status : VERIFIED 🥇
 │
-└── 🚀  GitHub Foundations
-          └── Status  : ✅ Completed
-          └── Scope   : Git, Repositories, Collaboration, Security
+└── [✓]  GitHub Foundations
+          issuer : GitHub
+          scope  : Git · Repositories · Collaboration · Security
+          status : COMPLETED ✅
 ```
 
 ---
 
-## `$ curl api.github.com/users/TrinhHuuKienQuoc`
+## `$ curl -s api.github.com/users/TrinhHuuKienQuoc | jq`
 
 ```json
 {
-  "learning"  : "Advanced Cloud-Native Architecture + Graduate School Preparation",
-  "open_for"  : "DevOps & Cloud Intern / Software Engineer",
-  "connect"   : "github.com/TrinhHuuKienQuoc"
+  "learning"  : "Advanced Cloud-Native Architecture & Graduate School Preparation",
+  "open_for"  : "DevOps & Cloud Intern  |  Software Engineer",
+  "github"    : "github.com/TrinhHuuKienQuoc"
 }
 ```
 
@@ -101,12 +104,14 @@ note     : Hoàn thành trong giới hạn thời gian nghiêm ngặt của hack
 <div align="center">
 
 ```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  "Tự động hóa mọi thứ · Tài liệu hóa rõ ràng
-        · Mở rộng không giới hạn."
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+╔══════════════════════════════════════════════════════════╗
+║  "Tự động hóa mọi thứ  ·  Tài liệu hóa rõ ràng          ║
+║   ·  Mở rộng không giới hạn."                            ║
+╚══════════════════════════════════════════════════════════╝
 ```
 
-![visitors](https://komarev.com/ghpvc/?username=TrinhHuuKienQuoc&style=flat-square&color=00d9ff)
+![Profile Views](https://komarev.com/ghpvc/?username=TrinhHuuKienQuoc&style=flat-square&color=00d9ff&label=PROFILE+VIEWS)
 
 </div>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00d9ff,50:0099bb,100:0a0e17&height=80&section=footer" width="100%"/>
