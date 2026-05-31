@@ -16,6 +16,7 @@ major    : Mạng máy tính & Truyền thông dữ liệu
 focus    : DevOps · Cloud Infrastructure · System Engineering
 goal     : Cloud-Native Architecture & Graduate School Preparation
 status   : 🟢 Open to — DevOps/Cloud Intern · Software Engineer
+intro    : https://introquozai22.netlify.app/
 ```
 
 > Coi **Infrastructure as Code (IaC)** và **Automation** là trụ cột cốt lõi.
