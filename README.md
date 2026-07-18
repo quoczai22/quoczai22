@@ -4,7 +4,7 @@
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=14&duration=2800&pause=1200&color=00D9FF&center=true&vCenter=true&width=600&lines=Cloud+%2F+DevOps+Engineer+in+progress...;Infrastructure+as+Code+%E2%86%92+Production;Automate+Everything+%7C+Document+Clearly+%7C+Scale+Without+Limits)](https://git.io/typing-svg)
 
-**[🌐 View My Personal Portfolio]([https://portfolioportfolioquoczai22.netlify.app/](https://portfoliokienquoc.vercel.app/))**
+**[🌐 View My Personal Portfolio](https://portfoliokienquoc.vercel.app/)**
 
 </div>
 
