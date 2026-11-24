@@ -7,6 +7,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'generate_devops_3d.py'
+      - '.github/workflows/devops-3d.yml'
   workflow_dispatch:
 
 permissions:
@@ -36,5 +39,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add dist/devops-3d-network.svg
-          git commit -m "chore(auto): update 3D DevOps network graph [skip ci]" || exit 0
-          git push
+          if git commit -m "chore(auto): update 3D DevOps network graph [skip ci]"; then
+            git pull --rebase origin main
+            git push
+          fi
