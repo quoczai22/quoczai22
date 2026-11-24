@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """
-Ultimate Mario GitHub Contribution Graph Generator.
-Mario literally consumes and eats your real 52-week contribution blocks!
-Every green commit block gets eaten, flashing and turning empty as Mario
-parkours across your coding history, collecting coins and 1-UP mushrooms!
-Pure Python standard library implementation.
+Super Mario GitHub Contribution Graph Generator.
+Mario parkours across your real 52-week contribution blocks, eating commits,
+collecting spinning coins, sliding down the flagpole, and clearing the level!
+Pure Python standard library implementation - Clean, playful & lightweight.
 """
 
 import os
@@ -142,19 +141,13 @@ def generate_mario_github_svg(filename="mario_contribution.svg"):
     cloud_pixels = ["      WWWW      ", "   WWWWWWWWWW   ", " WWWWWWWWWWWWWW ", " WWWWWWWWWWWWWW "]
     bush_pixels = ["      GGGG      ", "   GGGGGGGGGG   ", " GGGGGGGGGGGGGG ", " GGGGGGGGGGGGGG "]
     coin_pixels = ["  YYYY  ", " YYOOYY ", " YOOOOY ", " YOOOOY ", " YYOOYY ", "  YYYY  "]
-    mushroom_pixels = [
-        "    GGGG    ", "  GGGGGGGG  ", " GGWGGGGWWG ", " GGWWWWWWGG ",
-        "  GGGGGGGG  ", "   SSSSSS   ", "   SBSSBS   ", "   SSSSSS   "
-    ]
 
     mario_colors = {'R': '#e52521', 'S': '#ffcca6', 'B': '#8B4513', 'O': '#2038ec', 'Y': '#f8d820'}
-    mushroom_colors = {'G': '#00A800', 'W': '#FFFFFF', 'S': '#ffcca6', 'B': '#000000'}
 
     svg_elements.append(draw_sprite("mario", mario_pixels, mario_colors, 1.2))
     svg_elements.append(draw_sprite("cloud", cloud_pixels, {'W': '#FFFFFF'}, 2.0))
     svg_elements.append(draw_sprite("bush", bush_pixels, {'G': '#00A800'}, 2.0))
     svg_elements.append(draw_sprite("coin", coin_pixels, {'Y': '#f8d820', 'O': '#d8a000'}, 1.2))
-    svg_elements.append(draw_sprite("mushroom", mushroom_pixels, mushroom_colors, 1.2))
     svg_elements.append('  </defs>')
 
     # Sky & Scenery
@@ -184,9 +177,8 @@ def generate_mario_github_svg(filename="mario_contribution.svg"):
 
     empty_streak = 0
     coins_to_draw = []
-    mushroom_item = None
 
-    # Process Grid: Every green commit block is an edible target!
+    # Process Grid: Green commit blocks are eaten by Mario!
     for col, week in enumerate(weeks_data):
         highest_block_row = rows
         col_x = grid_x_offset + col * step
@@ -228,15 +220,6 @@ def generate_mario_github_svg(filename="mario_contribution.svg"):
                 't': t_hit
             })
 
-        # Spawn a 1-UP Mushroom at mid-stage (approx week 24-28)
-        if not mushroom_item and 22 <= col <= 30 and not is_empty_week:
-            mushroom_y = top_padding + highest_block_row * step - 14
-            mushroom_item = {
-                'x': col_x,
-                'y': mushroom_y,
-                't': t_hit
-            }
-
         # Gap Logic
         if is_empty_week:
             empty_streak += 1
@@ -264,7 +247,7 @@ def generate_mario_github_svg(filename="mario_contribution.svg"):
     path_d += f" L {flag_x - 4} {ground_y - mario_height} "
     path_d += f" L {castle_x + 15} {ground_y - mario_height} "
 
-    # DRAW COINS (Popping when commits are eaten by Mario!)
+    # DRAW COINS (Collected by Mario when commits are eaten!)
     for c in coins_to_draw:
         t, t_end = c['t'], min(1.0, c['t'] + 0.03)
         svg_elements.append(f'  <g transform="translate({c["x"]}, {c["y"]})">')
@@ -272,19 +255,6 @@ def generate_mario_github_svg(filename="mario_contribution.svg"):
         svg_elements.append(f'      <animateTransform attributeName="transform" type="translate" values="0,0; 0,0; 0,-20; 0,-20" keyTimes="0;{t:.3f};{t_end:.3f};1" dur="20s" repeatCount="indefinite" />')
         svg_elements.append(f'      <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;{t:.3f};{t + 0.005:.3f};{t_end:.3f};1" dur="20s" repeatCount="indefinite" />')
         svg_elements.append(f'      <use href="#coin" x="0" y="0" />')
-        svg_elements.append(f'    </g>')
-        svg_elements.append(f'  </g>')
-
-    # DRAW 1-UP MUSHROOM (Eaten by Mario on the commits!)
-    if mushroom_item:
-        mt = mushroom_item['t']
-        mt_end = min(1.0, mt + 0.04)
-        svg_elements.append(f'  <g transform="translate({mushroom_item["x"]}, {mushroom_item["y"]})">')
-        svg_elements.append(f'    <g>')
-        svg_elements.append(f'      <animateTransform attributeName="transform" type="translate" values="0,0; 0,0; 0,-18; 0,-18" keyTimes="0;{mt:.3f};{mt_end:.3f};1" dur="20s" repeatCount="indefinite" />')
-        svg_elements.append(f'      <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;{mt:.3f};{mt_end:.3f};1" dur="20s" repeatCount="indefinite" />')
-        svg_elements.append(f'      <use href="#mushroom" x="0" y="0" />')
-        svg_elements.append(f'      <text x="2" y="-4" fill="#00A800" font-family="monospace" font-weight="bold" font-size="10" stroke="#000" stroke-width="0.5">1-UP!</text>')
         svg_elements.append(f'    </g>')
         svg_elements.append(f'  </g>')
 
@@ -325,7 +295,7 @@ def generate_mario_github_svg(filename="mario_contribution.svg"):
     svg_elements.append(f'    <text x="0" y="0" fill="#FFFFFF" font-family="monospace" font-weight="bold" font-size="12" stroke="#000" stroke-width="0.8">MARIO</text>')
     svg_elements.append(f'    <text x="140" y="0" fill="#FFFFFF" font-family="monospace" font-weight="bold" font-size="12" stroke="#000" stroke-width="0.8">@{username.upper()}</text>')
     svg_elements.append(f'    <text x="400" y="0" fill="#f8d820" font-family="monospace" font-weight="bold" font-size="12" stroke="#000" stroke-width="0.8">WORLD 1-1</text>')
-    svg_elements.append(f'    <text x="600" y="0" fill="#FFFFFF" font-family="monospace" font-weight="bold" font-size="12" stroke="#000" stroke-width="0.8">COMMITS EATEN: {total_commits:,}</text>')
+    svg_elements.append(f'    <text x="600" y="0" fill="#FFFFFF" font-family="monospace" font-weight="bold" font-size="12" stroke="#000" stroke-width="0.8">COMMITS: {total_commits:,}</text>')
     svg_elements.append(f'  </g>')
 
     svg_elements.append('</svg>')

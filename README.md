@@ -4,7 +4,7 @@
 ### Software Engineer • AI Architect • DevOps Adventurer
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=13&duration=3000&pause=1000&color=22C55E&center=true&vCenter=true&width=560&lines=MARIO+PARKOURING+ACROSS+REAL+CONTRIBUTIONS!;COLLECTING+COINS+%26+1-UP+MUSHROOMS;LEVEL+1-1+CLEARED+INTO+THE+CASTLE!" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=13&duration=3000&pause=1000&color=22C55E&center=true&vCenter=true&width=560&lines=MARIO+PARKOURING+ACROSS+REAL+COMMITS!;COLLECTING+COINS+ON+CONTRIBUTION+BLOCKS;LEVEL+1-1+CLEARED+INTO+THE+CASTLE!" alt="Typing SVG" />
 </p>
 
 ---
@@ -20,7 +20,7 @@
 
 </div>
 
-### 🛠️ Core Tech Stack & Weapons
+### 🛠️ Core Tech Stack & Tools
 
 ```text
 ★ Languages     :: Python • PHP • JavaScript • TypeScript • C/C++ • Shell
