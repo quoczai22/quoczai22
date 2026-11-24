@@ -229,8 +229,8 @@ def generate_svg(weeks_data, output_file="mario_snake.svg"):
     mario_keyframes = ["@keyframes marioMove {"]
     for i, (px, py) in enumerate(path):
         progress = (i / (total_steps - 1)) * 100 if total_steps > 1 else 0
-        tx = px * size_cell
-        ty = py * size_cell
+        tx = px * size_cell - 3
+        ty = py * size_cell - 3
         
         # Face direction check
         flip = ""
@@ -270,60 +270,39 @@ def generate_svg(weeks_data, output_file="mario_snake.svg"):
     # Mario 8-Bit Sprite (16x16 pixel art scaled into 16px)
     # Mario palette: R: Red (#e52521), B: Brown (#8B4513), S: Skin (#ffcca6), U: Blue (#0026a8), Y: Yellow (#fbd000)
     # Super Mario Bros NES running/standing sprite
-    mario_pixels = [
-        "....RRRRR.......",
-        "...RRRRRRRRR....",
-        "...BBSBBBO......",
-        "..BSBSSSBO......",
-        "..BSBBSSSBO.....",
-        "..BBSSSSBB......",
-        "....SSSSSSS.....",
-        "...RRURR........",
-        "..RRRURRURRR....",
-        "..RRUUUUURRR....",
-        "..SSUYYUYUSS....",
-        "..SSSSSSSSSS....",
-        "..SS.UUUU.SS....",
-        "....UUUUUU......",
-        "...BBBB.BBBB....",
-        "..BBBBB.BBBBB..."
-    ]
-    color_map = {
-        'R': '#e52521',
-        'B': '#6a3805',
-        'S': '#fcd8a8',
-        'U': '#0038a8',
-        'Y': '#fbd000',
-        'O': '#d87000'
-    }
-    sprite_elements = []
-    scale = 1.0 # 16x16 fits cell_size (16px)
-    for row_idx, row in enumerate(mario_pixels):
-        for col_idx, ch in enumerate(row):
-            if ch in color_map:
-                sprite_elements.append(
-                    f'      <rect x="{col_idx*scale:.1f}" y="{row_idx*scale:.1f}" width="{scale}" height="{scale}" fill="{color_map[ch]}" />'
-                )
+    with open(r'mario_snippet.xml', 'r', encoding='utf-8') as f:
+        mario_vector_art = f.read()
+
+    css_text = ''.join(css_rules)
+    grid_text = ''.join(grid_rects)
+    stack_text = ''.join(stack_rects)
 
     svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="{view_box}" width="{svg_width}" height="{svg_height}">
   <desc>Mario eating contribution graph - inspired by Platane/snk</desc>
+  <defs>
+    <g id="mario-avatar">
+      <g transform="scale(0.22)">
+{mario_vector_art}
+      </g>
+    </g>
+  </defs>
   <style>
-{''.join(css_rules)}
+{css_text}
   </style>
 
   <!-- Contribution Grid -->
   <g id="grid">
-{''.join(grid_rects)}
+{grid_text}
   </g>
 
   <!-- Stack progress bar at bottom -->
   <g id="stack">
-{''.join(stack_rects)}
+{stack_text}
   </g>
 
   <!-- Mario Character Sprite -->
   <g class="mario-sprite">
-{''.join(sprite_elements)}
+    <use href="#mario-avatar" />
   </g>
 </svg>"""
 
