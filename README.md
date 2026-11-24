@@ -1,31 +1,33 @@
 <div align="center">
 
-# 🍄 Super Quoc Zai World (`@quoczai22`)
-### AI Engineer • Software Developer • Tech Adventurer
+# 🍄 Quoc Zai (`@quoczai22`)
+### Software Engineer • AI Architect • DevOps Adventurer
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Press+Start+2P&size=11&duration=3000&pause=1000&color=22C55E&center=true&vCenter=true&width=560&lines=MARIO+COLLECTING+COMMITS+ACROSS+52+WEEKS;1%2C565%2B+CONTRIBUTIONS+AND+COUNTING...;BUILDING+AI+MODELS+%26+WEB+PLATFORMS;LEVEL+1-1+COMPLETED!" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=13&duration=3000&pause=1000&color=22C55E&center=true&vCenter=true&width=560&lines=MARIO+PARKOURING+ACROSS+REAL+CONTRIBUTIONS!;COLLECTING+COINS+%26+1-UP+MUSHROOMS;LEVEL+1-1+CLEARED+INTO+THE+CASTLE!" alt="Typing SVG" />
 </p>
 
 ---
 
-### 🎮 Super Mario: 52-Week Contribution World
+### 🎮 Mario Contribution World (World 1-1)
 <p align="center">
-  <img alt="quoczai22's Super Mario Contribution Game" src="./dist/mario-commits.svg" width="100%" />
+  <picture>
+    <img alt="quoczai22's Mario Contribution Graph" src="./mario_contribution.svg" width="100%" />
+  </picture>
 </p>
 
 ---
 
 </div>
 
-### 🎒 Inventory & Skills (Tech Stack)
+### 🛠️ Core Tech Stack & Weapons
 
 ```text
-★ Core Languages :: Python • PHP • JavaScript • TypeScript • C/C++ • Shell
-★ AI & Data      :: Machine Learning • Churn Prediction • Agent Workflows
-★ Platforms      :: Linux • Docker • Git & GitHub Actions CI/CD
+★ Languages     :: Python • PHP • JavaScript • TypeScript • C/C++ • Shell
+★ AI & Machine  :: Machine Learning • Agent Workflows • Digital Heritage AI
+★ Cloud & Tools :: Docker • Kubernetes • GitHub Actions • Linux CI/CD
 ```
 
 <div align="center">
-  <sub>🍄 Mario traverses 52 weeks of contributions • Auto-synchronized every 12 hours via GitHub Actions</sub>
+  <sub>🍄 Mario calculates real parkour physics across your commits • Auto-synchronized every 12 hours</sub>
 </div>
