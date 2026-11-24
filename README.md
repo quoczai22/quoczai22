@@ -4,5 +4,5 @@
     src="./mario_snake.svg"
     width="100%"
   />
-  <p><em>🍄 This is Mario. He stole my commits! 🏃‍♂️💨</em></p>
+  <p><em><img src="./mario.svg" width="20" height="20" style="vertical-align: -3px;" /> This is Mario. He stole my commits! 🏃‍♂️💨</em></p>
 </div>
