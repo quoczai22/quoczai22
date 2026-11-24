@@ -16,12 +16,12 @@
     <g id="retro-hud" transform="translate(50, 22)">
         <!-- MARIO & LIVE SCORE -->
         <text x="0" y="0" fill="#000000" font-family="'Press Start 2P', ui-monospace, 'Courier New', monospace" font-size="9" font-weight="700">MARIO</text>
-        <text x="0" y="13" fill="#e52521" font-family="'Press Start 2P', ui-monospace, 'Courier New', monospace" font-size="9" font-weight="700">156600</text>
+        <text x="0" y="13" fill="#e52521" font-family="'Press Start 2P', ui-monospace, 'Courier New', monospace" font-size="9" font-weight="700">156700</text>
 
         <!-- COINS COLLECTED (7D COMMITS) -->
         <g transform="translate(190, -8)">
             <rect x="2.4" y="0.0" width="1.2" height="1.2" fill="#b45309"/><rect x="3.6" y="0.0" width="1.2" height="1.2" fill="#b45309"/><rect x="4.8" y="0.0" width="1.2" height="1.2" fill="#b45309"/><rect x="6.0" y="0.0" width="1.2" height="1.2" fill="#b45309"/><rect x="7.2" y="0.0" width="1.2" height="1.2" fill="#b45309"/><rect x="8.4" y="0.0" width="1.2" height="1.2" fill="#b45309"/><rect x="1.2" y="1.2" width="1.2" height="1.2" fill="#b45309"/><rect x="2.4" y="1.2" width="1.2" height="1.2" fill="#facc15"/><rect x="3.6" y="1.2" width="1.2" height="1.2" fill="#facc15"/><rect x="4.8" y="1.2" width="1.2" height="1.2" fill="#facc15"/><rect x="6.0" y="1.2" width="1.2" height="1.2" fill="#facc15"/><rect x="7.2" y="1.2" width="1.2" height="1.2" fill="#facc15"/><rect x="8.4" y="1.2" width="1.2" height="1.2" fill="#facc15"/><rect x="9.6" y="1.2" width="1.2" height="1.2" fill="#b45309"/><rect x="0.0" y="2.4" width="1.2" height="1.2" fill="#b45309"/><rect x="1.2" y="2.4" width="1.2" height="1.2" fill="#facc15"/><rect x="2.4" y="2.4" width="1.2" height="1.2" fill="#facc15"/><rect x="3.6" y="2.4" width="1.2" height="1.2" fill="#fef08a"/><rect x="4.8" y="2.4" width="1.2" height="1.2" fill="#fef08a"/><rect x="6.0" y="2.4" width="1.2" height="1.2" fill="#fef08a"/><rect x="7.2" y="2.4" width="1.2" height="1.2" fill="#fef08a"/><rect x="8.4" y="2.4" width="1.2" height="1.2" fill="#facc15"/><rect x="9.6" y="2.4" width="1.2" height="1.2" fill="#facc15"/><rect x="10.8" y="2.4" width="1.2" height="1.2" fill="#b45309"/><rect x="0.0" y="3.6" width="1.2" height="1.2" fill="#b45309"/><rect x="1.2" y="3.6" width="1.2" height="1.2" fill="#facc15"/><rect x="2.4" y="3.6" width="1.2" height="1.2" fill="#fef08a"/><rect x="3.6" y="3.6" width="1.2" height="1.2" fill="#78350f"/><rect x="4.8" y="3.6" width="1.2" height="1.2" fill="#78350f"/><rect x="6.0" y="3.6" width="1.2" height="1.2" fill="#78350f"/><rect x="7.2" y="3.6" width="1.2" height="1.2" fill="#78350f"/><rect x="8.4" y="3.6" width="1.2" height="1.2" fill="#facc15"/><rect x="9.6" y="3.6" width="1.2" height="1.2" fill="#fef08a"/><rect x="10.8" y="3.6" width="1.2" height="1.2" fill="#b45309"/><rect x="0.0" y="4.8" width="1.2" height="1.2" fill="#b45309"/><rect x="1.2" y="4.8" width="1.2" height="1.2" fill="#facc15"/><rect x="2.4" y="4.8" width="1.2" height="1.2" fill="#fef08a"/><rect x="3.6" y="4.8" width="1.2" height="1.2" fill="#78350f"/><rect x="4.8" y="4.8" width="1.2" height="1.2" fill="#78350f"/><rect x="6.0" y="4.8" width="1.2" height="1.2" fill="#78350f"/><rect x="7.2" y="4.8" width="1.2" height="1.2" fill="#78350f"/><rect x="8.4" y="4.8" width="1.2" height="1.2" fill="#facc15"/><rect x="9.6" y="4.8" width="1.2" height="1.2" fill="#fef08a"/><rect x="10.8" y="4.8" width="1.2" height="1.2" fill="#b45309"/><rect x="0.0" y="6.0" width="1.2" height="1.2" fill="#b45309"/><rect x="1.2" y="6.0" width="1.2" height="1.2" fill="#facc15"/><rect x="2.4" y="6.0" width="1.2" height="1.2" fill="#fef08a"/><rect x="3.6" y="6.0" width="1.2" height="1.2" fill="#78350f"/><rect x="4.8" y="6.0" width="1.2" height="1.2" fill="#78350f"/><rect x="6.0" y="6.0" width="1.2" height="1.2" fill="#78350f"/><rect x="7.2" y="6.0" width="1.2" height="1.2" fill="#78350f"/><rect x="8.4" y="6.0" width="1.2" height="1.2" fill="#facc15"/><rect x="9.6" y="6.0" width="1.2" height="1.2" fill="#fef08a"/><rect x="10.8" y="6.0" width="1.2" height="1.2" fill="#b45309"/><rect x="0.0" y="7.2" width="1.2" height="1.2" fill="#b45309"/><rect x="1.2" y="7.2" width="1.2" height="1.2" fill="#facc15"/><rect x="2.4" y="7.2" width="1.2" height="1.2" fill="#fef08a"/><rect x="3.6" y="7.2" width="1.2" height="1.2" fill="#78350f"/><rect x="4.8" y="7.2" width="1.2" height="1.2" fill="#78350f"/><rect x="6.0" y="7.2" width="1.2" height="1.2" fill="#78350f"/><rect x="7.2" y="7.2" width="1.2" height="1.2" fill="#78350f"/><rect x="8.4" y="7.2" width="1.2" height="1.2" fill="#facc15"/><rect x="9.6" y="7.2" width="1.2" height="1.2" fill="#fef08a"/><rect x="10.8" y="7.2" width="1.2" height="1.2" fill="#b45309"/><rect x="0.0" y="8.4" width="1.2" height="1.2" fill="#b45309"/><rect x="1.2" y="8.4" width="1.2" height="1.2" fill="#facc15"/><rect x="2.4" y="8.4" width="1.2" height="1.2" fill="#facc15"/><rect x="3.6" y="8.4" width="1.2" height="1.2" fill="#fef08a"/><rect x="4.8" y="8.4" width="1.2" height="1.2" fill="#fef08a"/><rect x="6.0" y="8.4" width="1.2" height="1.2" fill="#fef08a"/><rect x="7.2" y="8.4" width="1.2" height="1.2" fill="#fef08a"/><rect x="8.4" y="8.4" width="1.2" height="1.2" fill="#facc15"/><rect x="9.6" y="8.4" width="1.2" height="1.2" fill="#facc15"/><rect x="10.8" y="8.4" width="1.2" height="1.2" fill="#b45309"/><rect x="1.2" y="9.6" width="1.2" height="1.2" fill="#b45309"/><rect x="2.4" y="9.6" width="1.2" height="1.2" fill="#facc15"/><rect x="3.6" y="9.6" width="1.2" height="1.2" fill="#facc15"/><rect x="4.8" y="9.6" width="1.2" height="1.2" fill="#facc15"/><rect x="6.0" y="9.6" width="1.2" height="1.2" fill="#facc15"/><rect x="7.2" y="9.6" width="1.2" height="1.2" fill="#facc15"/><rect x="8.4" y="9.6" width="1.2" height="1.2" fill="#facc15"/><rect x="9.6" y="9.6" width="1.2" height="1.2" fill="#b45309"/><rect x="2.4" y="10.8" width="1.2" height="1.2" fill="#b45309"/><rect x="3.6" y="10.8" width="1.2" height="1.2" fill="#b45309"/><rect x="4.8" y="10.8" width="1.2" height="1.2" fill="#b45309"/><rect x="6.0" y="10.8" width="1.2" height="1.2" fill="#b45309"/><rect x="7.2" y="10.8" width="1.2" height="1.2" fill="#b45309"/><rect x="8.4" y="10.8" width="1.2" height="1.2" fill="#b45309"/>
-            <text x="24" y="17" fill="#000000" font-family="'Press Start 2P', ui-monospace, 'Courier New', monospace" font-size="9" font-weight="700">x256</text>
+            <text x="24" y="17" fill="#000000" font-family="'Press Start 2P', ui-monospace, 'Courier New', monospace" font-size="9" font-weight="700">x257</text>
             <text x="56" y="17" fill="#b45309" font-family="'Press Start 2P', ui-monospace, 'Courier New', monospace" font-size="6.5" font-weight="700">7D COINS</text>
         </g>
 
@@ -31,7 +31,7 @@
 
         <!-- TOTAL 52-WEEK CONTRIBUTIONS EATEN -->
         <text x="580" y="0" fill="#000000" font-family="'Press Start 2P', ui-monospace, 'Courier New', monospace" font-size="9" font-weight="700">COMMITS EATEN</text>
-        <text x="640" y="13" fill="#0058f8" font-family="'Press Start 2P', ui-monospace, 'Courier New', monospace" font-size="9" font-weight="700">1,566 PTS</text>
+        <text x="640" y="13" fill="#0058f8" font-family="'Press Start 2P', ui-monospace, 'Courier New', monospace" font-size="9" font-weight="700">1,567 PTS</text>
     </g>
     
 
@@ -64,9 +64,9 @@
                              repeatCount="indefinite" />
                 </rect>
                 <rect x="136" y="112" width="11" height="11" rx="2" fill="#ebedf0"/>
-                <rect x="136" y="126" width="11" height="11" rx="2" fill="#40c463">
+                <rect x="136" y="126" width="11" height="11" rx="2" fill="#30a14e">
                     <animate attributeName="fill"
-                             values="#40c463; #40c463; #ffffff; #ebedf0; #ebedf0; #40c463"
+                             values="#30a14e; #30a14e; #ffffff; #ebedf0; #ebedf0; #30a14e"
                              keyTimes="0; 0.147; 0.152; 0.162; 0.96; 1"
                              dur="12.0s"
                              repeatCount="indefinite" />
@@ -232,9 +232,9 @@
                              repeatCount="indefinite" />
                 </rect>
                 
-                <rect x="248" y="112" width="11" height="11" rx="2" fill="#9be9a8">
+                <rect x="248" y="112" width="11" height="11" rx="2" fill="#40c463">
                     <animate attributeName="fill"
-                             values="#9be9a8; #9be9a8; #ffffff; #ebedf0; #ebedf0; #9be9a8"
+                             values="#40c463; #40c463; #ffffff; #ebedf0; #ebedf0; #40c463"
                              keyTimes="0; 0.264; 0.269; 0.279; 0.96; 1"
                              dur="12.0s"
                              repeatCount="indefinite" />
@@ -319,7 +319,15 @@
                              dur="12.0s"
                              repeatCount="indefinite" />
                 </rect>
-                <rect x="318" y="112" width="11" height="11" rx="2" fill="#ebedf0"/><rect x="318" y="126" width="11" height="11" rx="2" fill="#ebedf0"/><rect x="318" y="140" width="11" height="11" rx="2" fill="#ebedf0"/>
+                <rect x="318" y="112" width="11" height="11" rx="2" fill="#ebedf0"/><rect x="318" y="126" width="11" height="11" rx="2" fill="#ebedf0"/>
+                <rect x="318" y="140" width="11" height="11" rx="2" fill="#9be9a8">
+                    <animate attributeName="fill"
+                             values="#9be9a8; #9be9a8; #ffffff; #ebedf0; #ebedf0; #9be9a8"
+                             keyTimes="0; 0.336; 0.341; 0.351; 0.96; 1"
+                             dur="12.0s"
+                             repeatCount="indefinite" />
+                </rect>
+                
                 <rect x="332" y="56" width="11" height="11" rx="2" fill="#9be9a8">
                     <animate attributeName="fill"
                              values="#9be9a8; #9be9a8; #ffffff; #ebedf0; #ebedf0; #9be9a8"
@@ -576,22 +584,14 @@
                              repeatCount="indefinite" />
                 </rect>
                 
-                <rect x="444" y="84" width="11" height="11" rx="2" fill="#40c463">
+                <rect x="444" y="84" width="11" height="11" rx="2" fill="#30a14e">
                     <animate attributeName="fill"
-                             values="#40c463; #40c463; #ffffff; #ebedf0; #ebedf0; #40c463"
+                             values="#30a14e; #30a14e; #ffffff; #ebedf0; #ebedf0; #30a14e"
                              keyTimes="0; 0.467; 0.472; 0.482; 0.96; 1"
                              dur="12.0s"
                              repeatCount="indefinite" />
                 </rect>
-                
-                <rect x="444" y="98" width="11" height="11" rx="2" fill="#40c463">
-                    <animate attributeName="fill"
-                             values="#40c463; #40c463; #ffffff; #ebedf0; #ebedf0; #40c463"
-                             keyTimes="0; 0.467; 0.472; 0.482; 0.96; 1"
-                             dur="12.0s"
-                             repeatCount="indefinite" />
-                </rect>
-                
+                <rect x="444" y="98" width="11" height="11" rx="2" fill="#ebedf0"/>
                 <rect x="444" y="112" width="11" height="11" rx="2" fill="#30a14e">
                     <animate attributeName="fill"
                              values="#30a14e; #30a14e; #ffffff; #ebedf0; #ebedf0; #30a14e"
@@ -871,7 +871,15 @@
                              dur="12.0s"
                              repeatCount="indefinite" />
                 </rect>
-                <rect x="598" y="84" width="11" height="11" rx="2" fill="#ebedf0"/><rect x="598" y="98" width="11" height="11" rx="2" fill="#ebedf0"/><rect x="598" y="112" width="11" height="11" rx="2" fill="#ebedf0"/>
+                <rect x="598" y="84" width="11" height="11" rx="2" fill="#ebedf0"/><rect x="598" y="98" width="11" height="11" rx="2" fill="#ebedf0"/>
+                <rect x="598" y="112" width="11" height="11" rx="2" fill="#9be9a8">
+                    <animate attributeName="fill"
+                             values="#9be9a8; #9be9a8; #ffffff; #ebedf0; #ebedf0; #9be9a8"
+                             keyTimes="0; 0.627; 0.632; 0.642; 0.96; 1"
+                             dur="12.0s"
+                             repeatCount="indefinite" />
+                </rect>
+                
                 <rect x="598" y="126" width="11" height="11" rx="2" fill="#216e39">
                     <animate attributeName="fill"
                              values="#216e39; #216e39; #ffffff; #ebedf0; #ebedf0; #216e39"
@@ -880,9 +888,9 @@
                              repeatCount="indefinite" />
                 </rect>
                 
-                <rect x="598" y="140" width="11" height="11" rx="2" fill="#30a14e">
+                <rect x="598" y="140" width="11" height="11" rx="2" fill="#40c463">
                     <animate attributeName="fill"
-                             values="#30a14e; #30a14e; #ffffff; #ebedf0; #ebedf0; #30a14e"
+                             values="#40c463; #40c463; #ffffff; #ebedf0; #ebedf0; #40c463"
                              keyTimes="0; 0.627; 0.632; 0.642; 0.96; 1"
                              dur="12.0s"
                              repeatCount="indefinite" />
@@ -920,9 +928,9 @@
                              repeatCount="indefinite" />
                 </rect>
                 
-                <rect x="612" y="112" width="11" height="11" rx="2" fill="#40c463">
+                <rect x="612" y="112" width="11" height="11" rx="2" fill="#9be9a8">
                     <animate attributeName="fill"
-                             values="#40c463; #40c463; #ffffff; #ebedf0; #ebedf0; #40c463"
+                             values="#9be9a8; #9be9a8; #ffffff; #ebedf0; #ebedf0; #9be9a8"
                              keyTimes="0; 0.642; 0.647; 0.657; 0.96; 1"
                              dur="12.0s"
                              repeatCount="indefinite" />
