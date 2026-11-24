@@ -1,34 +1,52 @@
-name: GitHub-Profile-3D-Contrib
+name: Sync GitHub Profile 3D & DevOps Network
 
 on:
   schedule:
-    - cron: "0 18 * * *" # Tự động cập nhật mỗi ngày vào 1h sáng (giờ VN)
-  workflow_dispatch: # Cho phép bấm chạy thủ công trong tab Actions
+    # Tự động đồng bộ mỗi 12 tiếng một lần
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
   push:
     branches:
       - main
+    paths:
+      - "generate_devops_3d.py"
+      - ".github/workflows/main.yml"
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  build-and-sync:
     runs-on: ubuntu-latest
-    name: generate-github-profile-3d-contrib
+    name: sync-profile-visuals
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Generate 3D SVG
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate DevOps 3D Isometric Network
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USERNAME: ${{ github.repository_owner }}
+        run: |
+          python generate_devops_3d.py
+
+      - name: Generate 3D Contribution Calendar
         uses: yoshi389111/github-profile-3d-contrib@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USERNAME: quoczai22
+          USERNAME: ${{ github.repository_owner }}
 
-      - name: Commit & Push
+      - name: Commit & Push Telemetry to Main
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add -A .
-          git commit -m "Update 3D contribution graph" || exit 0
-          git push
+          git add dist/devops-3d-network.svg profile-3d-contrib/
+          if git commit -m "📡 [Mesh Telemetry]: Synced packet telemetry & 3D cluster topology [skip ci]"; then
+            git pull --rebase origin main
+            git push
+          fi

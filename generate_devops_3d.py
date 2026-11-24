@@ -2,6 +2,7 @@
 """
 Generate a 3D Isometric DevOps Network SVG for GitHub Profile.
 Pure Python standard library implementation.
+Network & NOC (Network Operations Center) telemetry theme.
 """
 
 import os
@@ -15,15 +16,15 @@ import urllib.error
 GITHUB_USERNAME = os.environ.get("GITHUB_USERNAME", "quoczai22")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "").strip()
 
-WIDTH = 860
-HEIGHT = 480
-ORIGIN_X = 430
-ORIGIN_Y = 270
+WIDTH = 880
+HEIGHT = 500
+ORIGIN_X = 440
+ORIGIN_Y = 280
 
 COS30 = math.cos(math.radians(30))  # ≈ 0.866025
 SIN30 = math.sin(math.radians(30))  # 0.5
 
-# Canonical language colors
+# Canonical programming language & DevOps colors
 LANG_COLORS = {
     "JavaScript": "#f1e05a",
     "Python": "#3572A5",
@@ -133,7 +134,6 @@ def get_profile_data():
                     color = edge["node"].get("color")
                     if color:
                         LANG_COLORS[name] = color
-                    # Filter out non-code markup if desired, or keep core langs
                     lang_totals[name] = lang_totals.get(name, 0) + size
 
             sorted_langs = sorted(lang_totals.items(), key=lambda item: item[1], reverse=True)[:5]
@@ -143,7 +143,7 @@ def get_profile_data():
                     {"name": name, "percentage": round((size / total_bytes) * 100, 1)}
                     for name, size in sorted_langs
                 ]
-                print(f"[✓] Fetched successfully: 7d commits={commits_7d}, 30d commits={commits_30d}, langs={len(languages)}")
+                print(f"[✓] Fetched successfully: 7d={commits_7d}, 30d={commits_30d}, langs={len(languages)}")
                 return {
                     "commits_7d": commits_7d,
                     "commits_30d": commits_30d,
@@ -170,24 +170,19 @@ def get_profile_data():
 
 def render_isometric_cuboid(fx, fy, w, d, h, base_color, stroke_color=None, stroke_width=1, add_rack_lines=False):
     """
-    Renders an isometric cuboid anchored at its front-bottom vertex (fx, fy).
-    - Light source from top-left.
-    - Top face: Bright highlight (factor 1.28)
-    - Left face: Medium light (factor 0.98)
-    - Right face: Deeper shadow (factor 0.65)
+    Renders an isometric cuboid anchored at front-bottom vertex (fx, fy).
+    Light source from top-left.
     """
     ux = (w / 2) * COS30
     uy = (w / 2) * SIN30
     vx = (d / 2) * COS30
     vy = (d / 2) * SIN30
 
-    # Base vertices (Z = 0)
     fb = (round(fx, 2), round(fy, 2))
     lb = (round(fx - vx, 2), round(fy - vy, 2))
     rb = (round(fx + ux, 2), round(fy - uy, 2))
     bb = (round(fx - vx + ux, 2), round(fy - vy - uy, 2))
 
-    # Top vertices (Z = h)
     ft = (round(fx, 2), round(fy - h, 2))
     lt = (round(fx - vx, 2), round(fy - vy - h, 2))
     rt = (round(fx + ux, 2), round(fy - uy - h, 2))
@@ -205,20 +200,18 @@ def render_isometric_cuboid(fx, fy, w, d, h, base_color, stroke_color=None, stro
         f'<polygon points="{lb[0]},{lb[1]} {fb[0]},{fb[1]} {ft[0]},{ft[1]} {lt[0]},{lt[1]}" '
         f'fill="{c_left}" stroke="{border}" stroke-width="{stroke_width}" stroke-linejoin="round"/>'
     )
-
     # Right face
     svg.append(
         f'<polygon points="{fb[0]},{fb[1]} {rb[0]},{rb[1]} {rt[0]},{rt[1]} {ft[0]},{ft[1]}" '
         f'fill="{c_right}" stroke="{border}" stroke-width="{stroke_width}" stroke-linejoin="round"/>'
     )
-
     # Top face
     svg.append(
         f'<polygon points="{bt[0]},{bt[1]} {rt[0]},{rt[1]} {ft[0]},{ft[1]} {lt[0]},{lt[1]}" '
         f'fill="{c_top}" stroke="{border}" stroke-width="{stroke_width}" stroke-linejoin="round"/>'
     )
 
-    # Optional server rack slotted horizontal lines on left/right faces
+    # Server rack slotted horizontal blade vents
     if add_rack_lines and h >= 30:
         step = 10
         for offset_z in range(12, int(h - 8), step):
@@ -226,11 +219,11 @@ def render_isometric_cuboid(fx, fy, w, d, h, base_color, stroke_color=None, stro
             l2 = (fb[0], round(fb[1] - offset_z, 2))
             r1 = (fb[0], round(fb[1] - offset_z, 2))
             r2 = (rb[0], round(rb[1] - offset_z, 2))
-            svg.append(f'<line x1="{l1[0]}" y1="{l1[1]}" x2="{l2[0]}" y2="{l2[1]}" stroke="#0f172a" stroke-width="1.2" opacity="0.7"/>')
-            svg.append(f'<line x1="{r1[0]}" y1="{r1[1]}" x2="{r2[0]}" y2="{r2[1]}" stroke="#0f172a" stroke-width="1.2" opacity="0.8"/>')
-            # Small green/cyan server LED dot on left face
+            svg.append(f'<line x1="{l1[0]}" y1="{l1[1]}" x2="{l2[0]}" y2="{l2[1]}" stroke="#0f172a" stroke-width="1.2" opacity="0.75"/>')
+            svg.append(f'<line x1="{r1[0]}" y1="{r1[1]}" x2="{r2[0]}" y2="{r2[1]}" stroke="#0f172a" stroke-width="1.2" opacity="0.85"/>')
+            # Blinking LED status indicator on left rack
             led_pos = (round(lb[0] + (fb[0] - lb[0]) * 0.25, 2), round(lb[1] - offset_z + 2, 2))
-            svg.append(f'<circle cx="{led_pos[0]}" cy="{led_pos[1]}" r="1.2" fill="#22c55e" opacity="0.9"/>')
+            svg.append(f'<circle cx="{led_pos[0]}" cy="{led_pos[1]}" r="1.3" fill="#22c55e" opacity="0.9"/>')
 
     return "".join(svg), ft
 
@@ -240,9 +233,9 @@ def build_devops_svg(data):
     commits_30d = data["commits_30d"]
     languages = data["languages"]
 
-    # Packet speed proportional to commit frequency
+    # Packet velocity based on 7-day commit throughput
     if commits_7d >= 100:
-        packet_dur = 1.4
+        packet_dur = 1.3
     elif commits_7d >= 30:
         packet_dur = 2.0
     elif commits_7d >= 10:
@@ -250,42 +243,37 @@ def build_devops_svg(data):
     else:
         packet_dur = 4.5
 
-    # Center coordinates
     cx = ORIGIN_X
     cy = ORIGIN_Y
 
-    # Isometric grid floor (centered diamond matrix)
+    # Isometric floor grid
     grid_svg = []
-    grid_step = 38
+    grid_step = 40
     grid_count = 5
     for i in range(-grid_count, grid_count + 1):
-        # Line along U axis
-        start_u = (cx + (i * grid_step - grid_count * grid_step) * COS30, cy + (i * grid_step + grid_count * grid_step) * SIN30)
-        end_u = (cx + (i * grid_step + grid_count * grid_step) * COS30, cy + (i * grid_step - grid_count * grid_step) * SIN30)
-        grid_svg.append(f'<line x1="{start_u[0]:.1f}" y1="{start_u[1]:.1f}" x2="{end_u[0]:.1f}" y2="{end_u[1]:.1f}" stroke="#1e293b" stroke-width="0.8" opacity="0.5"/>')
-        # Line along V axis
-        start_v = (cx + (-grid_count * grid_step - i * grid_step) * COS30, cy + (-grid_count * grid_step + i * grid_step) * SIN30)
-        end_v = (cx + (grid_count * grid_step - i * grid_step) * COS30, cy + (grid_count * grid_step + i * grid_step) * SIN30)
-        grid_svg.append(f'<line x1="{start_v[0]:.1f}" y1="{start_v[1]:.1f}" x2="{end_v[0]:.1f}" y2="{end_v[1]:.1f}" stroke="#1e293b" stroke-width="0.8" opacity="0.5"/>')
+        su = (cx + (i * grid_step - grid_count * grid_step) * COS30, cy + (i * grid_step + grid_count * grid_step) * SIN30)
+        eu = (cx + (i * grid_step + grid_count * grid_step) * COS30, cy + (i * grid_step - grid_count * grid_step) * SIN30)
+        grid_svg.append(f'<line x1="{su[0]:.1f}" y1="{su[1]:.1f}" x2="{eu[0]:.1f}" y2="{eu[1]:.1f}" stroke="#1e293b" stroke-width="0.8" opacity="0.55"/>')
+        sv = (cx + (-grid_count * grid_step - i * grid_step) * COS30, cy + (-grid_count * grid_step + i * grid_step) * SIN30)
+        ev = (cx + (grid_count * grid_step - i * grid_step) * COS30, cy + (grid_count * grid_step + i * grid_step) * SIN30)
+        grid_svg.append(f'<line x1="{sv[0]:.1f}" y1="{sv[1]:.1f}" x2="{ev[0]:.1f}" y2="{ev[1]:.1f}" stroke="#1e293b" stroke-width="0.8" opacity="0.55"/>')
 
-    # Add ambient intersection dots
+    # Ambient intersection dots
     for ix in [-2, 0, 2]:
         for iy in [-2, 0, 2]:
             dx = cx + (ix * grid_step - iy * grid_step) * COS30
             dy = cy + (ix * grid_step + iy * grid_step) * SIN30
-            grid_svg.append(f'<circle cx="{dx:.1f}" cy="{dy:.1f}" r="1.5" fill="#38bdf8" opacity="0.3"/>')
+            grid_svg.append(f'<circle cx="{dx:.1f}" cy="{dy:.1f}" r="1.6" fill="#38bdf8" opacity="0.35"/>')
 
     render_queue = []
 
-    # 1. CORE API GATEWAY at Center (cx, cy)
-    core_w, core_d = 62, 62
-    core_h = 58
-    # Pedestal base
+    # 1. CORE BGP ROUTER at Center (cx, cy)
+    core_w, core_d = 64, 64
+    core_h = 60
     pedestal_svg, _ = render_isometric_cuboid(cx, cy + 12, core_w + 16, core_d + 16, 10, "#0f172a", stroke_color="#334155")
-    # Core Main Body
     core_svg, core_ft = render_isometric_cuboid(cx, cy, core_w, core_d, core_h, "#0284c7", stroke_color="#38bdf8", stroke_width=1.5, add_rack_lines=True)
-    # Floating Holographic Beacon atop core
-    beacon_cy = core_ft[1] - 16
+
+    beacon_cy = core_ft[1] - 18
     beacon_svg = f"""
     <g transform="translate({core_ft[0]}, {beacon_cy})">
         <polygon points="0,-16 14,-7 14,7 0,16 -14,7 -14,-7" fill="#0284c7" fill-opacity="0.4" stroke="#38bdf8" stroke-width="1.4" filter="url(#glow-cyan)"/>
@@ -299,10 +287,9 @@ def build_devops_svg(data):
         "svg": pedestal_svg + core_svg + beacon_svg
     })
 
-    # 2. WORKER NODES (5 nodes evenly placed on an isometric ellipse)
-    rx = 225
-    ry = 125
-    # Symmetrical angles around center: North (-90°), NE (-18°), SE (54°), SW (126°), NW (198°)
+    # 2. WORKER POD NODES (5 nodes on an isometric ellipse)
+    rx = 230
+    ry = 130
     angles = [-90, -18, 54, 126, 198]
 
     cables_svg = []
@@ -317,10 +304,9 @@ def build_devops_svg(data):
 
         pct = lang["percentage"]
         node_color = LANG_COLORS.get(lang["name"], "#0ea5e9")
-        node_h = max(30, min(80, int(25 + pct * 0.95)))
-        node_w, node_d = 40, 40
+        node_h = max(32, min(82, int(26 + pct * 0.95)))
+        node_w, node_d = 42, 42
 
-        # Node pedestal + body
         n_pedestal, _ = render_isometric_cuboid(nx, ny + 6, node_w + 8, node_d + 8, 6, "#0f172a", stroke_color="#1e293b")
         n_body, n_ft = render_isometric_cuboid(nx, ny, node_w, node_d, node_h, node_color, stroke_color=shade_color(node_color, 1.4), stroke_width=1.2, add_rack_lines=True)
 
@@ -329,15 +315,14 @@ def build_devops_svg(data):
             "svg": n_pedestal + n_body
         })
 
-        # Curved Cable connecting Core to Worker Node
+        # Dual Fiber Optic Cable
         core_port_x = cx
         core_port_y = cy - 14
         node_port_x = nx
         node_port_y = ny - 6
 
-        # Quadratic curve midpoint with subtle isometric elevation
         ctrl_x = (core_port_x + node_port_x) / 2
-        ctrl_y = (core_port_y + node_port_y) / 2 - 16
+        ctrl_y = (core_port_y + node_port_y) / 2 - 18
 
         path_d = f"M {core_port_x:.1f} {core_port_y:.1f} Q {ctrl_x:.1f} {ctrl_y:.1f} {node_port_x:.1f} {node_port_y:.1f}"
         rev_path_d = f"M {node_port_x:.1f} {node_port_y:.1f} Q {ctrl_x:.1f} {ctrl_y:.1f} {core_port_x:.1f} {core_port_y:.1f}"
@@ -346,7 +331,6 @@ def build_devops_svg(data):
             f'<path d="{path_d}" fill="none" stroke="{node_color}" stroke-width="2.2" stroke-dasharray="5 3" opacity="0.65" />'
         )
 
-        # Traveling Data Packets (Inbound & Outbound)
         delay1 = round(idx * (packet_dur / 5.0), 2)
         delay2 = round(delay1 + (packet_dur / 2.0), 2)
 
@@ -359,63 +343,69 @@ def build_devops_svg(data):
         </circle>
         """)
 
-        # Sleek label pill positioned directly below node's front vertex
+        # Network interface label below each node
         label_y = ny + 14
         labels_svg.append(f"""
         <g transform="translate({nx:.1f}, {label_y:.1f})">
-            <rect x="-50" y="-10" width="100" height="20" rx="4" fill="#0b0f17" fill-opacity="0.9" stroke="{node_color}" stroke-width="0.9"/>
-            <circle cx="-38" cy="0" r="3.2" fill="{node_color}"/>
-            <text x="-28" y="3.5" fill="#f8fafc" font-size="9" font-family="'JetBrains Mono', 'Fira Code', Consolas, monospace" font-weight="600">
-                {lang['name'][:11].upper()}
+            <rect x="-56" y="-11" width="112" height="22" rx="4" fill="#0b0f17" fill-opacity="0.9" stroke="{node_color}" stroke-width="0.9"/>
+            <circle cx="-45" cy="0" r="3" fill="{node_color}"/>
+            <text x="-36" y="3.5" fill="#f8fafc" font-size="8.8" font-family="'JetBrains Mono', 'Fira Code', Consolas, monospace" font-weight="700">
+                ETH{idx}: {lang['name'][:9].upper()}
             </text>
-            <text x="40" y="3.5" fill="#94a3b8" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="500" text-anchor="end">
+            <text x="47" y="3.5" fill="#38bdf8" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="600" text-anchor="end">
                 {pct}%
             </text>
         </g>
         """)
 
-    # Painter's Algorithm Depth Sort: back items drawn first (smaller Y), front items drawn last
+    # Painter's Algorithm Depth Sort
     render_queue.sort(key=lambda item: item["y"])
     rendered_boxes = "".join([item["svg"] for item in render_queue])
 
-    # Core Label Pill
+    # Core Router Label
     core_label_svg = f"""
-    <g transform="translate({cx}, {cy + 22})">
-        <rect x="-60" y="-11" width="120" height="22" rx="4" fill="#0369a1" fill-opacity="0.9" stroke="#38bdf8" stroke-width="1.2" filter="url(#glow-cyan)"/>
-        <text x="0" y="3.5" fill="#ffffff" font-size="9.5" font-family="'JetBrains Mono', monospace" font-weight="700" text-anchor="middle">
-            CORE GATEWAY
+    <g transform="translate({cx}, {cy + 24})">
+        <rect x="-68" y="-12" width="136" height="24" rx="4" fill="#0369a1" fill-opacity="0.92" stroke="#38bdf8" stroke-width="1.3" filter="url(#glow-cyan)"/>
+        <text x="0" y="4" fill="#ffffff" font-size="9.5" font-family="'JetBrains Mono', monospace" font-weight="700" text-anchor="middle">
+            CORE ROUTER [BGP-01]
         </text>
     </g>
     """
 
-    # HUD Telemetry Terminal
+    # NOC Telemetry & Network-Themed HUD
     throughput = round(commits_30d / 30.0, 1)
     hud_svg = f"""
-    <!-- Left HUD Box -->
+    <!-- Left HUD: NOC Telemetry -->
     <g transform="translate(24, 22)">
-        <rect width="280" height="92" rx="6" fill="#0f172a" fill-opacity="0.88" stroke="#334155" stroke-width="1.2"/>
+        <rect width="290" height="96" rx="6" fill="#0f172a" fill-opacity="0.9" stroke="#334155" stroke-width="1.2"/>
         <circle cx="16" cy="18" r="4.5" fill="#22c55e">
-            <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
         </circle>
-        <text x="28" y="21.5" fill="#f8fafc" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="700">
-            CLUSTER: HEALTHY
+        <text x="28" y="21.5" fill="#f8fafc" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="700">
+            NOC TELEMETRY // GATEWAY ONLINE
         </text>
-        <line x1="12" y1="32" x2="268" y2="32" stroke="#1e293b" stroke-width="1"/>
-        <text x="14" y="48" fill="#64748b" font-size="9" font-family="'JetBrains Mono', monospace">OPERATOR:</text>
-        <text x="120" y="48" fill="#38bdf8" font-size="9" font-family="'JetBrains Mono', monospace" font-weight="700">@{GITHUB_USERNAME}</text>
-        <text x="14" y="64" fill="#64748b" font-size="9" font-family="'JetBrains Mono', monospace">7D COMMITS:</text>
-        <text x="120" y="64" fill="#22c55e" font-size="9" font-family="'JetBrains Mono', monospace" font-weight="700">{commits_7d} pkts</text>
-        <text x="14" y="80" fill="#64748b" font-size="9" font-family="'JetBrains Mono', monospace">30D THROUGHPUT:</text>
-        <text x="120" y="80" fill="#f59e0b" font-size="9" font-family="'JetBrains Mono', monospace" font-weight="700">{commits_30d} ({throughput}/day)</text>
+        <line x1="12" y1="32" x2="278" y2="32" stroke="#1e293b" stroke-width="1"/>
+        <text x="14" y="48" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">NET OPERATOR:</text>
+        <text x="135" y="48" fill="#38bdf8" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">@{GITHUB_USERNAME} [ADMIN]</text>
+        <text x="14" y="64" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">7D COMMITS (RX):</text>
+        <text x="135" y="64" fill="#22c55e" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">{commits_7d} PKTS [ACK 100%]</text>
+        <text x="14" y="80" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">30D BANDWIDTH:</text>
+        <text x="135" y="80" fill="#f59e0b" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">{commits_30d} FRAMES ({throughput} req/d)</text>
     </g>
 
-    <!-- Right HUD Box -->
+    <!-- Right HUD: Network Topology Spec -->
     <g transform="translate(636, 22)">
-        <rect width="200" height="52" rx="6" fill="#0f172a" fill-opacity="0.88" stroke="#334155" stroke-width="1.2"/>
-        <text x="14" y="22" fill="#64748b" font-size="9" font-family="'JetBrains Mono', monospace">INFRASTRUCTURE:</text>
-        <text x="120" y="22" fill="#a855f7" font-size="9" font-family="'JetBrains Mono', monospace" font-weight="700">ISOMETRIC 3D</text>
-        <text x="14" y="38" fill="#64748b" font-size="9" font-family="'JetBrains Mono', monospace">REFRESH CYCLE:</text>
-        <text x="120" y="38" fill="#38bdf8" font-size="9" font-family="'JetBrains Mono', monospace" font-weight="700">12 HOURS</text>
+        <rect width="220" height="96" rx="6" fill="#0f172a" fill-opacity="0.9" stroke="#334155" stroke-width="1.2"/>
+        <text x="14" y="21" fill="#f8fafc" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="700">
+            TOPOLOGY SPECS
+        </text>
+        <line x1="12" y1="32" x2="208" y2="32" stroke="#1e293b" stroke-width="1"/>
+        <text x="14" y="48" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">ARCHITECTURE:</text>
+        <text x="110" y="48" fill="#a855f7" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">BGP TCP MESH</text>
+        <text x="14" y="64" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">PACKET LOSS:</text>
+        <text x="110" y="64" fill="#22c55e" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">0.0% [LOSSLESS]</text>
+        <text x="14" y="80" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">LINK LATENCY:</text>
+        <text x="110" y="80" fill="#38bdf8" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">12ms (PING RTT)</text>
     </g>
     """
 
@@ -438,7 +428,7 @@ def build_devops_svg(data):
             <stop offset="100%" stop-color="#06090e"/>
         </radialGradient>
         <radialGradient id="center-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#0284c7" stop-opacity="0.18"/>
+            <stop offset="0%" stop-color="#0284c7" stop-opacity="0.2"/>
             <stop offset="100%" stop-color="#0284c7" stop-opacity="0"/>
         </radialGradient>
     </defs>
@@ -447,14 +437,14 @@ def build_devops_svg(data):
     <rect width="{WIDTH}" height="{HEIGHT}" fill="url(#space-bg)" rx="10"/>
 
     <!-- Subtle Ambient Center Glow -->
-    <ellipse cx="{cx}" cy="{cy}" rx="280" ry="160" fill="url(#center-glow)"/>
+    <ellipse cx="{cx}" cy="{cy}" rx="290" ry="170" fill="url(#center-glow)"/>
 
     <!-- Isometric Symmetrical Floor Grid -->
     <g id="isometric-grid">
         {"".join(grid_svg)}
     </g>
 
-    <!-- Optical Fiber Data Cables -->
+    <!-- Fiber Optic Data Cables -->
     <g id="data-cables">
         {"".join(cables_svg)}
     </g>
@@ -464,7 +454,7 @@ def build_devops_svg(data):
         {rendered_boxes}
     </g>
 
-    <!-- Core Gateway Label -->
+    <!-- Core Router Label -->
     {core_label_svg}
 
     <!-- Worker Node Labels -->
@@ -477,7 +467,7 @@ def build_devops_svg(data):
         {"".join(packets_svg)}
     </g>
 
-    <!-- HUD Telemetry Overlay -->
+    <!-- NOC Telemetry Overlay -->
     {hud_svg}
 </svg>"""
     return svg_content
