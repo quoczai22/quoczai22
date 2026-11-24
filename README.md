@@ -1,5 +1,5 @@
 
-## This is a green snake, and my commits are being eaten.
+## This is a green snake 🐍, and my commits are being eaten.
 <picture>
   <source
     media="(prefers-color-scheme: dark)"
