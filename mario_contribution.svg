@@ -562,7 +562,12 @@
   </rect>
   <rect x="306" y="96" width="10" height="10" class="empty" />
   <rect x="306" y="110" width="10" height="10" class="empty" />
-  <rect x="306" y="124" width="10" height="10" class="empty" />
+  <rect x="306" y="124" width="10" height="10" class="lvl1">
+    <animate attributeName="fill"
+             values="#0e4429; #0e4429; #ffffff; rgba(255,255,255,0.22); rgba(255,255,255,0.22); #0e4429"
+             keyTimes="0; 0.349; 0.357; 0.371; 0.98; 1"
+             dur="20s" repeatCount="indefinite" />
+  </rect>
   <rect x="320" y="40" width="10" height="10" class="lvl1">
     <animate attributeName="fill"
              values="#0e4429; #0e4429; #ffffff; rgba(255,255,255,0.22); rgba(255,255,255,0.22); #0e4429"
@@ -787,12 +792,7 @@
              keyTimes="0; 0.498; 0.506; 0.520; 0.98; 1"
              dur="20s" repeatCount="indefinite" />
   </rect>
-  <rect x="432" y="82" width="10" height="10" class="lvl1">
-    <animate attributeName="fill"
-             values="#0e4429; #0e4429; #ffffff; rgba(255,255,255,0.22); rgba(255,255,255,0.22); #0e4429"
-             keyTimes="0; 0.498; 0.506; 0.520; 0.98; 1"
-             dur="20s" repeatCount="indefinite" />
-  </rect>
+  <rect x="432" y="82" width="10" height="10" class="empty" />
   <rect x="432" y="96" width="10" height="10" class="lvl1">
     <animate attributeName="fill"
              values="#0e4429; #0e4429; #ffffff; rgba(255,255,255,0.22); rgba(255,255,255,0.22); #0e4429"
@@ -960,9 +960,9 @@
              keyTimes="0; 0.614; 0.622; 0.636; 0.98; 1"
              dur="20s" repeatCount="indefinite" />
   </rect>
-  <rect x="544" y="40" width="10" height="10" class="lvl2">
+  <rect x="544" y="40" width="10" height="10" class="lvl1">
     <animate attributeName="fill"
-             values="#006d32; #006d32; #ffffff; rgba(255,255,255,0.22); rgba(255,255,255,0.22); #006d32"
+             values="#0e4429; #0e4429; #ffffff; rgba(255,255,255,0.22); rgba(255,255,255,0.22); #0e4429"
              keyTimes="0; 0.630; 0.638; 0.652; 0.98; 1"
              dur="20s" repeatCount="indefinite" />
   </rect>
@@ -1045,7 +1045,12 @@
   </rect>
   <rect x="586" y="68" width="10" height="10" class="empty" />
   <rect x="586" y="82" width="10" height="10" class="empty" />
-  <rect x="586" y="96" width="10" height="10" class="empty" />
+  <rect x="586" y="96" width="10" height="10" class="lvl1">
+    <animate attributeName="fill"
+             values="#0e4429; #0e4429; #ffffff; rgba(255,255,255,0.22); rgba(255,255,255,0.22); #0e4429"
+             keyTimes="0; 0.680; 0.688; 0.702; 0.98; 1"
+             dur="20s" repeatCount="indefinite" />
+  </rect>
   <rect x="586" y="110" width="10" height="10" class="lvl2">
     <animate attributeName="fill"
              values="#006d32; #006d32; #ffffff; rgba(255,255,255,0.22); rgba(255,255,255,0.22); #006d32"
@@ -1715,6 +1720,6 @@
     <text x="0" y="0" fill="#FFFFFF" font-family="monospace" font-weight="bold" font-size="12" stroke="#000" stroke-width="0.8">MARIO</text>
     <text x="140" y="0" fill="#FFFFFF" font-family="monospace" font-weight="bold" font-size="12" stroke="#000" stroke-width="0.8">@QUOCZAI22</text>
     <text x="400" y="0" fill="#f8d820" font-family="monospace" font-weight="bold" font-size="12" stroke="#000" stroke-width="0.8">WORLD 1-1</text>
-    <text x="600" y="0" fill="#FFFFFF" font-family="monospace" font-weight="bold" font-size="12" stroke="#000" stroke-width="0.8">COMMITS: 1,572</text>
+    <text x="600" y="0" fill="#FFFFFF" font-family="monospace" font-weight="bold" font-size="12" stroke="#000" stroke-width="0.8">COMMITS: 1,573</text>
   </g>
 </svg>
