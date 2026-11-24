@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
 Generate a Super Mario Contribution Graph Game SVG for GitHub Profile.
-Pure Python standard library implementation.
-Draws the real 52-week GitHub contribution grid with animated Mario,
-Goomba, Warp Pipe, and Question Blocks (Light/Clean Retro Theme).
+Mario literally runs across the 52-week contribution grid, EATING the green
+commit blocks (turning them from green to eaten), chasing & eating Super Mushrooms,
+and popping coins into the Green Warp Pipe! (Light / Clean Retro Theme).
 """
 
 import os
@@ -34,6 +34,8 @@ COLOR_L1 = "#9be9a8"
 COLOR_L2 = "#40c463"
 COLOR_L3 = "#30a14e"
 COLOR_L4 = "#216e39"
+
+TOTAL_DUR = 12.0  # Total animation loop duration in seconds
 
 
 def fetch_github_calendar(username, token):
@@ -135,7 +137,7 @@ def get_calendar_data():
     }
 
 
-def parse_pixel_grid(matrix, color_map, pixel_size=1.5):
+def parse_pixel_grid(matrix, color_map, pixel_size=1.4):
     """Converts an ASCII matrix into crisp SVG rect pixels."""
     svg_rects = []
     for r, row in enumerate(matrix):
@@ -149,8 +151,8 @@ def parse_pixel_grid(matrix, color_map, pixel_size=1.5):
     return "".join(svg_rects)
 
 
-def build_sprites(scale=1.4):
-    """Builds mini 8-bit Mario, Goomba, Coin, and Pipe sprites."""
+def build_sprites():
+    """Builds mini 8-bit Mario, Super Mushroom, and Coin sprites."""
     mario_colors = {
         'R': '#e52521',  # Red cap/shirt
         'B': '#6b2f0a',  # Brown hair/shoes
@@ -159,7 +161,7 @@ def build_sprites(scale=1.4):
         'Y': '#facc15',  # Yellow buttons
     }
 
-    mario_run1 = [
+    mario_run = [
         "....RRRRR......",
         "...RRRRRRRRR...",
         "...BBBSSBS.....",
@@ -178,7 +180,7 @@ def build_sprites(scale=1.4):
         ".BBBB....BBBB.."
     ]
 
-    mario_jump = [
+    mario_eat_jump = [
         "....SSSRRR.....",
         "...SSRRRRRR....",
         "...BBBSSBS.....",
@@ -197,31 +199,27 @@ def build_sprites(scale=1.4):
         "..............."
     ]
 
-    goomba_colors = {
-        'B': '#7c2d12',
-        'T': '#b45309',
-        'W': '#ffffff',
-        'K': '#000000',
-        'F': '#1c1917',
+    # Authentic 8-bit Super Mushroom
+    shroom_colors = {
+        'R': '#e52521',  # Red cap
+        'W': '#ffffff',  # White spots
+        'S': '#fcd8a8',  # Tan face
+        'K': '#000000',  # Black eyes/outline
     }
 
-    goomba_matrix = [
-        ".....BBBBBB.....",
-        "...BBBBBBBBBB...",
-        "..BBBBBBBBBBBB..",
-        ".BBBBBBBBBBBBBB.",
-        "BBBBWKBKBKWBBBBB",
-        "BBBBWKBKBKWBBBBB",
-        "BBBBWKBKBKWBBBBB",
-        "BBBBBBBBBBBBBBBB",
-        "....TTTTTTTT....",
-        "...TTTTTTTTTT...",
-        "..TTTTTTTTTTTT..",
-        "..TTTTTTTTTTTT..",
-        ".FFFFF....FFFFF.",
-        "FFFFFFF..FFFFFFF",
-        "FFFFFFF..FFFFFFF",
-        "................"
+    shroom_matrix = [
+        ".....RRRRRR.....",
+        "...RRRRRRRRRR...",
+        "..RRWWRRRRWWRR..",
+        ".RRWWWRRRRWWWRR.",
+        ".RRWWWRRRRWWWRR.",
+        "RRRRRRRRRRRRRRRR",
+        "RRRRRRRRRRRRRRRR",
+        "....SSSSSSSS....",
+        "...SSKSSSSKSS...",
+        "...SSKSSSSKSS...",
+        "...SSSSSSSSSS...",
+        "....SSSSSSSS...."
     ]
 
     coin_colors = {
@@ -245,10 +243,10 @@ def build_sprites(scale=1.4):
     ]
 
     return {
-        "mario_run": parse_pixel_grid(mario_run1, mario_colors, scale),
-        "mario_jump": parse_pixel_grid(mario_jump, mario_colors, scale),
-        "goomba": parse_pixel_grid(goomba_matrix, goomba_colors, scale),
-        "coin": parse_pixel_grid(coin_matrix, coin_colors, scale),
+        "mario_run": parse_pixel_grid(mario_run, mario_colors, pixel_size=1.4),
+        "mario_eat": parse_pixel_grid(mario_eat_jump, mario_colors, pixel_size=1.4),
+        "mushroom": parse_pixel_grid(shroom_matrix, shroom_colors, pixel_size=1.3),
+        "coin": parse_pixel_grid(coin_matrix, coin_colors, pixel_size=1.2),
     }
 
 
@@ -257,15 +255,13 @@ def build_contribution_svg(data):
     weeks = data["weeks"]
 
     # Calculate 7-day commits
-    recent_7d = 0
     all_days = []
     for w in weeks:
         for d in w["contributionDays"]:
             all_days.append(d)
-    if len(all_days) >= 7:
-        recent_7d = sum(d["contributionCount"] for d in all_days[-7:])
+    recent_7d = sum(d["contributionCount"] for d in all_days[-7:]) if len(all_days) >= 7 else 0
 
-    sprites = build_sprites(scale=1.4)
+    sprites = build_sprites()
 
     # 1. Month Labels across the top
     month_names = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -279,16 +275,14 @@ def build_contribution_svg(data):
         month_num = int(first_date.split("-")[1])
         if month_num != last_month:
             x_pos = START_X + w_idx * STEP
-            # Don't place too close to previous
             if not month_labels or (x_pos - month_labels[-1][0] >= 38):
                 month_labels.append((x_pos, month_names[month_num]))
                 last_month = month_num
 
-    month_svg = []
-    for mx, mname in month_labels:
-        month_svg.append(
-            f'<text x="{mx}" y="44" fill="#57606a" font-family="{FONT_TEXT}" font-size="10" font-weight="500">{mname}</text>'
-        )
+    month_svg = [
+        f'<text x="{mx}" y="44" fill="#57606a" font-family="{FONT_TEXT}" font-size="10" font-weight="500">{mname}</text>'
+        for mx, mname in month_labels
+    ]
 
     # 2. Day of Week Labels on left (Mon, Wed, Fri)
     day_labels_svg = [
@@ -297,32 +291,54 @@ def build_contribution_svg(data):
         f'<text x="26" y="{START_Y + 5 * STEP + 9}" fill="#57606a" font-family="{FONT_TEXT}" font-size="9">Fri</text>',
     ]
 
-    # 3. 53-Week Grid Cells
+    # 3. 53-Week Grid Cells WITH DYNAMIC EATING ANIMATION
+    # Mario runs from Week 0 to Week 53 between time fraction 0.05 and 0.88
+    # When Mario visits Week w, every green commit cell in that column gets EATEN!
+    # It flashes white and turns into #ebedf0 (eaten empty), then resets at loop end!
     cells_svg = []
+    num_weeks = len(weeks)
+
     for w_idx, week in enumerate(weeks):
+        # Time fraction when Mario traverses column w_idx
+        t_arrive = round(0.06 + (w_idx / (num_weeks + 2)) * 0.80, 3)
+        t_eaten = round(t_arrive + 0.015, 3)
+        t_reset = 0.96
+
         for day in week["contributionDays"]:
             d_idx = day["weekday"]
             cx = START_X + w_idx * STEP
             cy = START_Y + d_idx * STEP
             cnt = day["contributionCount"]
 
-            # Map count to authentic GitHub light colors
             if cnt == 0:
-                color = COLOR_EMPTY
-            elif cnt <= 3:
-                color = COLOR_L1
-            elif cnt <= 9:
-                color = COLOR_L2
-            elif cnt <= 19:
-                color = COLOR_L3
+                # Empty cell stays empty
+                cells_svg.append(
+                    f'<rect x="{cx}" y="{cy}" width="{CELL_SIZE}" height="{CELL_SIZE}" rx="2" fill="{COLOR_EMPTY}"/>'
+                )
             else:
-                color = COLOR_L4
+                # Green commit cell
+                if cnt <= 3:
+                    orig_color = COLOR_L1
+                elif cnt <= 9:
+                    orig_color = COLOR_L2
+                elif cnt <= 19:
+                    orig_color = COLOR_L3
+                else:
+                    orig_color = COLOR_L4
 
-            cells_svg.append(
-                f'<rect x="{cx}" y="{cy}" width="{CELL_SIZE}" height="{CELL_SIZE}" rx="2" fill="{color}"/>'
-            )
+                # Mario EATS this cell: green -> flash white -> consumed #ebedf0 -> resets at end
+                cell_anim = f"""
+                <rect x="{cx}" y="{cy}" width="{CELL_SIZE}" height="{CELL_SIZE}" rx="2" fill="{orig_color}">
+                    <animate attributeName="fill"
+                             values="{orig_color}; {orig_color}; #ffffff; {COLOR_EMPTY}; {COLOR_EMPTY}; {orig_color}"
+                             keyTimes="0; {t_arrive}; {t_arrive + 0.005:.3f}; {t_eaten}; {t_reset}; 1"
+                             dur="{TOTAL_DUR}s"
+                             repeatCount="indefinite" />
+                </rect>
+                """
+                cells_svg.append(cell_anim)
 
-    # 4. Green Warp Pipe at the right end of the grid (Week 53, x = 794)
+    # 4. Green Warp Pipe at the right end (Week 53, x = 794)
     pipe_x = START_X + len(weeks) * STEP + 4
     pipe_y = START_Y + 2 * STEP
     pipe_w = 26
@@ -343,116 +359,119 @@ def build_contribution_svg(data):
     </g>
     """
 
-    # 5. Question Blocks [?] placed over high-commit weeks
-    q_blocks_svg = []
-    q_block_weeks = [14, 28, 42]
-    for qw in q_block_weeks:
-        bx = START_X + qw * STEP - 3
-        by = START_Y - 20
-        q_blocks_svg.append(f"""
-        <g transform="translate({bx}, {by})">
-            <rect width="18" height="18" rx="2" fill="#fc9838" stroke="#000000" stroke-width="1"/>
-            <rect x="2" y="2" width="14" height="14" fill="#fce000"/>
-            <!-- Pixel ? -->
-            <rect x="7" y="4" width="5" height="2" fill="#884400"/>
-            <rect x="10" y="6" width="2" height="3" fill="#884400"/>
-            <rect x="8" y="9" width="3" height="2" fill="#884400"/>
-            <rect x="8" y="13" width="2" height="2" fill="#884400"/>
+    # 5. SUPER MUSHROOM SPAWNS FROM COMMITS & BOUNCES FORWARD
+    # Mushroom spawns at Week 8 (t = 2.0s), bounces across the tops of commit blocks,
+    # and Mario chases it until catching and eating it at Week 28 (t = 5.2s)!
+    shroom_start_x = START_X + 8 * STEP
+    shroom_catch_x = START_X + 28 * STEP
+    shroom_y = START_Y - 14
+
+    shroom_anim_svg = f"""
+    <g id="commit-mushroom">
+        <!-- Mushroom bounces across commit blocks ahead of Mario -->
+        <animateTransform
+            attributeName="transform"
+            type="translate"
+            values="{shroom_start_x},{shroom_y}; {shroom_start_x + 80},{shroom_y - 12}; {shroom_start_x + 160},{shroom_y}; {shroom_catch_x},{shroom_y}; {shroom_catch_x},{shroom_y}"
+            keyTimes="0; 0.20; 0.35; 0.44; 1"
+            dur="{TOTAL_DUR}s"
+            repeatCount="indefinite"
+        />
+        <!-- Mushroom disappears when Mario catches & eats it at t = 0.44! -->
+        <g>
+            <animate attributeName="opacity" values="0; 1; 1; 0; 0" keyTimes="0; 0.12; 0.43; 0.45; 1" dur="{TOTAL_DUR}s" repeatCount="indefinite"/>
+            {sprites['mushroom']}
+            <!-- 1-UP Floating text when eaten -->
+            <text x="10" y="-8" fill="#00a800" font-family="{FONT_PIXEL}" font-size="7" font-weight="700">1-UP!</text>
         </g>
-        """)
+    </g>
+    """
 
-    # 6. Animated Mario navigating the Contribution Grid
-    # Mario runs along the grid, jumping from column to column, and lands into the Warp Pipe!
-    m_start_x = START_X - 10
-    m_end_x = pipe_x + 3
-    base_mario_y = START_Y + 5 * STEP - 10
+    # 6. ANIMATED MARIO EATING COMMITS ACROSS THE 52 WEEKS
+    # Mario runs from left to right, jumping up and down across the rows of commit blocks,
+    # chomping the green blocks, eating the mushroom, and diving into the pipe at the end!
+    m_start_x = START_X - 18
+    m_end_x = pipe_x + 2
+    row_top_y = START_Y + 1 * STEP - 14
+    row_mid_y = START_Y + 3 * STEP - 14
+    row_bot_y = START_Y + 5 * STEP - 14
 
-    # Path coordinates for Mario's journey across the 52 weeks
-    mario_journey_values = (
-        f"{m_start_x},{base_mario_y}; "
-        f"{START_X + 14 * STEP},{base_mario_y - 30}; "
-        f"{START_X + 18 * STEP},{base_mario_y}; "
-        f"{START_X + 28 * STEP},{base_mario_y - 32}; "
-        f"{START_X + 32 * STEP},{base_mario_y}; "
-        f"{START_X + 42 * STEP},{base_mario_y - 35}; "
-        f"{START_X + 46 * STEP},{base_mario_y}; "
-        f"{m_end_x},{pipe_y - 24}; "
-        f"{m_end_x},{pipe_y + 4}"
+    # Mario's chomping trajectory visiting rows of commits
+    mario_journey = (
+        f"{m_start_x},{row_bot_y}; "
+        f"{START_X + 10 * STEP},{row_mid_y}; "
+        f"{START_X + 20 * STEP},{row_top_y}; "
+        f"{shroom_catch_x},{shroom_y + 2}; "      # Catches mushroom at Week 28!
+        f"{START_X + 36 * STEP},{row_mid_y}; "
+        f"{START_X + 44 * STEP},{row_bot_y}; "
+        f"{START_X + 50 * STEP},{row_mid_y}; "
+        f"{m_end_x},{pipe_y - 24}; "             # Jumps onto pipe rim
+        f"{m_end_x},{pipe_y + 6}; "              # Dives down into pipe!
+        f"{m_end_x},{pipe_y + 6}"
     )
 
     mario_anim_svg = f"""
-    <g id="grid-mario">
-        <!-- Movement across the 52-week contribution field -->
+    <g id="commit-eating-mario">
+        <!-- Mario traversing and eating the 52-week contribution blocks -->
         <animateTransform
             attributeName="transform"
             type="translate"
-            values="{mario_journey_values}"
-            keyTimes="0; 0.22; 0.32; 0.48; 0.58; 0.72; 0.82; 0.94; 1"
-            dur="9s"
+            values="{mario_journey}"
+            keyTimes="0; 0.16; 0.32; 0.44; 0.58; 0.70; 0.80; 0.90; 0.95; 1"
+            dur="{TOTAL_DUR}s"
             repeatCount="indefinite"
         />
-        <!-- Mario Sprite Animation -->
+        <!-- Mario Sprite: Toggling between running & jumping/chomping -->
         <g id="mario-sprites">
             <g id="mario-run">
-                <animate attributeName="display" values="inline; none; inline; none; inline" keyTimes="0; 0.20; 0.35; 0.70; 0.85" dur="9s" repeatCount="indefinite"/>
+                <animate attributeName="display" values="inline; none; inline; none; inline; none" keyTimes="0; 0.16; 0.40; 0.45; 0.75; 0.90" dur="{TOTAL_DUR}s" repeatCount="indefinite"/>
                 {sprites['mario_run']}
             </g>
-            <g id="mario-jump" display="none">
-                <animate attributeName="display" values="none; inline; none; inline; none" keyTimes="0; 0.20; 0.35; 0.70; 0.85" dur="9s" repeatCount="indefinite"/>
-                {sprites['mario_jump']}
+            <g id="mario-eat" display="none">
+                <animate attributeName="display" values="none; inline; none; inline; none; inline" keyTimes="0; 0.16; 0.40; 0.45; 0.75; 0.90" dur="{TOTAL_DUR}s" repeatCount="indefinite"/>
+                {sprites['mario_eat']}
             </g>
         </g>
     </g>
     """
 
-    # 7. Animated Goomba patrolling along a row of the grid
-    g_x1 = START_X + 22 * STEP
-    g_x2 = START_X + 36 * STEP
-    goomba_y = START_Y + 6 * STEP - 8
-
-    goomba_anim_svg = f"""
-    <g id="grid-goomba">
-        <animateTransform
-            attributeName="transform"
-            type="translate"
-            values="{g_x1},{goomba_y}; {g_x2},{goomba_y}; {g_x1},{goomba_y}"
-            keyTimes="0; 0.5; 1"
-            dur="6s"
-            repeatCount="indefinite"
-        />
-        {sprites['goomba']}
-    </g>
-    """
-
-    # 8. Spawning Gold Coins over Question Blocks
+    # 7. Popping Coins when high commit clusters get eaten
     popping_coins_svg = []
-    for qw in q_block_weeks:
-        cx = START_X + qw * STEP
-        cy = START_Y - 24
+    coin_spots = [12, 24, 38, 48]
+    for cs in coin_spots:
+        cx = START_X + cs * STEP
+        cy = START_Y + 2 * STEP
+        t_pop = round(0.06 + (cs / (num_weeks + 2)) * 0.80, 2)
         popping_coins_svg.append(f"""
         <g transform="translate({cx}, {cy})">
             <animateTransform
                 attributeName="transform"
                 type="translate"
-                values="{cx},{cy}; {cx},{cy - 20}; {cx},{cy}"
-                dur="1.8s"
+                values="{cx},{cy}; {cx},{cy - 22}; {cx},{cy - 12}"
+                keyTimes="0; 0.5; 1"
+                begin="{t_pop * TOTAL_DUR:.1f}s"
+                dur="0.8s"
                 repeatCount="indefinite"
             />
-            {sprites['coin']}
+            <g opacity="0">
+                <animate attributeName="opacity" values="0; 1; 0" keyTimes="0; 0.2; 1" begin="{t_pop * TOTAL_DUR:.1f}s" dur="0.8s" repeatCount="indefinite"/>
+                {sprites['coin']}
+                <text x="14" y="-4" fill="#b45309" font-family="{FONT_PIXEL}" font-size="7" font-weight="700">+100</text>
+            </g>
         </g>
         """)
 
-    # 9. Classic Super Mario Arcade HUD Header (Top Bar)
+    # 8. Classic Super Mario Arcade HUD Header (Top Bar)
     score = total * 100
     score_str = f"{score:06d}"
 
     hud_svg = f"""
     <g id="retro-hud" transform="translate(50, 22)">
-        <!-- MARIO & SCORE -->
+        <!-- MARIO & LIVE SCORE -->
         <text x="0" y="0" fill="#000000" font-family="{FONT_PIXEL}" font-size="9" font-weight="700">MARIO</text>
         <text x="0" y="13" fill="#e52521" font-family="{FONT_PIXEL}" font-size="9" font-weight="700">{score_str}</text>
 
-        <!-- COINS (7D COMMITS) -->
+        <!-- COINS COLLECTED (7D COMMITS) -->
         <g transform="translate(190, -8)">
             {sprites['coin']}
             <text x="24" y="17" fill="#000000" font-family="{FONT_PIXEL}" font-size="9" font-weight="700">x{recent_7d:02d}</text>
@@ -463,9 +482,9 @@ def build_contribution_svg(data):
         <text x="430" y="0" fill="#000000" font-family="{FONT_PIXEL}" font-size="9" font-weight="700">WORLD</text>
         <text x="442" y="13" fill="#00a800" font-family="{FONT_PIXEL}" font-size="9" font-weight="700">1-1</text>
 
-        <!-- TOTAL YEAR CONTRIBUTIONS -->
-        <text x="610" y="0" fill="#000000" font-family="{FONT_PIXEL}" font-size="9" font-weight="700">CONTRIBUTIONS</text>
-        <text x="670" y="13" fill="#0058f8" font-family="{FONT_PIXEL}" font-size="9" font-weight="700">{total:,}</text>
+        <!-- TOTAL 52-WEEK CONTRIBUTIONS EATEN -->
+        <text x="580" y="0" fill="#000000" font-family="{FONT_PIXEL}" font-size="9" font-weight="700">COMMITS EATEN</text>
+        <text x="640" y="13" fill="#0058f8" font-family="{FONT_PIXEL}" font-size="9" font-weight="700">{total:,} PTS</text>
     </g>
     """
 
@@ -494,10 +513,10 @@ def build_contribution_svg(data):
         </style>
     </defs>
 
-    <!-- Clean Light Background with soft border -->
+    <!-- Clean Light Canvas with soft border -->
     <rect width="{WIDTH}" height="{HEIGHT}" fill="#ffffff" stroke="#d0d7de" stroke-width="1" rx="8"/>
 
-    <!-- Super Mario Arcade HUD -->
+    <!-- Super Mario Arcade HUD Header -->
     {hud_svg}
 
     <!-- Month Labels -->
@@ -510,7 +529,7 @@ def build_contribution_svg(data):
         {"".join(day_labels_svg)}
     </g>
 
-    <!-- 52-Week Contribution Grid -->
+    <!-- 52-Week Contribution Grid (Animated Commit Eating Effect) -->
     <g id="contribution-cells">
         {"".join(cells_svg)}
     </g>
@@ -518,20 +537,15 @@ def build_contribution_svg(data):
     <!-- Green Warp Pipe -->
     {pipe_svg}
 
-    <!-- Question Blocks [?] -->
-    <g id="q-blocks">
-        {"".join(q_blocks_svg)}
-    </g>
+    <!-- Super Mushroom (Bouncing & Eaten by Mario) -->
+    {shroom_anim_svg}
 
-    <!-- Popping Gold Coins -->
+    <!-- Popping Score Coins -->
     <g id="popping-coins">
         {"".join(popping_coins_svg)}
     </g>
 
-    <!-- Walking Goomba on Grid -->
-    {goomba_anim_svg}
-
-    <!-- Animated Mario Running & Jumping Across Grid -->
+    <!-- Mario Running, Chomping Commits & Eating Mushroom -->
     {mario_anim_svg}
 
     <!-- Contribution Level Legend -->
@@ -549,7 +563,7 @@ def main():
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(svg_code)
 
-    print(f"[✓] Mario Contribution Grid SVG generated at: {output_path}")
+    print(f"[✓] Mario Commit-Eating Grid SVG generated at: {output_path}")
 
 
 if __name__ == "__main__":
