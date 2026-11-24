@@ -1,4 +1,4 @@
-name: Sync GitHub Profile 3D & DevOps Network
+name: Sync DevOps 3D Network Telemetry
 
 on:
   schedule:
@@ -18,7 +18,7 @@ permissions:
 jobs:
   build-and-sync:
     runs-on: ubuntu-latest
-    name: sync-profile-visuals
+    name: sync-telemetry
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -35,17 +35,11 @@ jobs:
         run: |
           python generate_devops_3d.py
 
-      - name: Generate 3D Contribution Calendar
-        uses: yoshi389111/github-profile-3d-contrib@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USERNAME: ${{ github.repository_owner }}
-
       - name: Commit & Push Telemetry to Main
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add dist/devops-3d-network.svg profile-3d-contrib/
+          git add dist/devops-3d-network.svg
           if git commit -m "📡 [Mesh Telemetry]: Synced packet telemetry & 3D cluster topology [skip ci]"; then
             git pull --rebase origin main
             git push

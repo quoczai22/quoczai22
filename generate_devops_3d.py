@@ -43,6 +43,8 @@ LANG_COLORS = {
     "C#": "#178600",
 }
 
+FONT_FAMILY = "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace"
+
 
 def hex_to_rgb(hex_str):
     hex_str = hex_str.lstrip("#")
@@ -343,16 +345,17 @@ def build_devops_svg(data):
         </circle>
         """)
 
-        # Network interface label below each node
+        # Network interface label below each node (NO TRUNCATION)
         label_y = ny + 14
+        lang_display = lang['name'].upper()
         labels_svg.append(f"""
         <g transform="translate({nx:.1f}, {label_y:.1f})">
-            <rect x="-56" y="-11" width="112" height="22" rx="4" fill="#0b0f17" fill-opacity="0.9" stroke="{node_color}" stroke-width="0.9"/>
-            <circle cx="-45" cy="0" r="3" fill="{node_color}"/>
-            <text x="-36" y="3.5" fill="#f8fafc" font-size="8.8" font-family="'JetBrains Mono', 'Fira Code', Consolas, monospace" font-weight="700">
-                ETH{idx}: {lang['name'][:9].upper()}
+            <rect x="-64" y="-11" width="128" height="22" rx="4" fill="#0b0f17" fill-opacity="0.92" stroke="{node_color}" stroke-width="0.9"/>
+            <circle cx="-52" cy="0" r="3" fill="{node_color}"/>
+            <text x="-43" y="3.5" fill="#f8fafc" font-size="8.5" font-family="{FONT_FAMILY}" font-weight="700">
+                ETH{idx}: {lang_display}
             </text>
-            <text x="47" y="3.5" fill="#38bdf8" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="600" text-anchor="end">
+            <text x="54" y="3.5" fill="#38bdf8" font-size="8" font-family="{FONT_FAMILY}" font-weight="600" text-anchor="end">
                 {pct}%
             </text>
         </g>
@@ -365,8 +368,8 @@ def build_devops_svg(data):
     # Core Router Label
     core_label_svg = f"""
     <g transform="translate({cx}, {cy + 24})">
-        <rect x="-68" y="-12" width="136" height="24" rx="4" fill="#0369a1" fill-opacity="0.92" stroke="#38bdf8" stroke-width="1.3" filter="url(#glow-cyan)"/>
-        <text x="0" y="4" fill="#ffffff" font-size="9.5" font-family="'JetBrains Mono', monospace" font-weight="700" text-anchor="middle">
+        <rect x="-72" y="-12" width="144" height="24" rx="4" fill="#0369a1" fill-opacity="0.92" stroke="#38bdf8" stroke-width="1.3" filter="url(#glow-cyan)"/>
+        <text x="0" y="4" fill="#ffffff" font-size="9.5" font-family="{FONT_FAMILY}" font-weight="700" text-anchor="middle">
             CORE ROUTER [BGP-01]
         </text>
     </g>
@@ -377,35 +380,35 @@ def build_devops_svg(data):
     hud_svg = f"""
     <!-- Left HUD: NOC Telemetry -->
     <g transform="translate(24, 22)">
-        <rect width="290" height="96" rx="6" fill="#0f172a" fill-opacity="0.9" stroke="#334155" stroke-width="1.2"/>
+        <rect width="290" height="96" rx="6" fill="#0f172a" fill-opacity="0.92" stroke="#334155" stroke-width="1.2"/>
         <circle cx="16" cy="18" r="4.5" fill="#22c55e">
             <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
         </circle>
-        <text x="28" y="21.5" fill="#f8fafc" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="700">
+        <text x="28" y="21.5" fill="#f8fafc" font-size="10.5" font-family="{FONT_FAMILY}" font-weight="700">
             NOC TELEMETRY // GATEWAY ONLINE
         </text>
         <line x1="12" y1="32" x2="278" y2="32" stroke="#1e293b" stroke-width="1"/>
-        <text x="14" y="48" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">NET OPERATOR:</text>
-        <text x="135" y="48" fill="#38bdf8" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">@{GITHUB_USERNAME} [ADMIN]</text>
-        <text x="14" y="64" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">7D COMMITS (RX):</text>
-        <text x="135" y="64" fill="#22c55e" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">{commits_7d} PKTS [ACK 100%]</text>
-        <text x="14" y="80" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">30D BANDWIDTH:</text>
-        <text x="135" y="80" fill="#f59e0b" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">{commits_30d} FRAMES ({throughput} req/d)</text>
+        <text x="14" y="48" fill="#64748b" font-size="8.8" font-family="{FONT_FAMILY}">NET OPERATOR:</text>
+        <text x="135" y="48" fill="#38bdf8" font-size="8.8" font-family="{FONT_FAMILY}" font-weight="700">@{GITHUB_USERNAME} [ADMIN]</text>
+        <text x="14" y="64" fill="#64748b" font-size="8.8" font-family="{FONT_FAMILY}">7D COMMITS (RX):</text>
+        <text x="135" y="64" fill="#22c55e" font-size="8.8" font-family="{FONT_FAMILY}" font-weight="700">{commits_7d} PKTS [ACK 100%]</text>
+        <text x="14" y="80" fill="#64748b" font-size="8.8" font-family="{FONT_FAMILY}">30D BANDWIDTH:</text>
+        <text x="135" y="80" fill="#f59e0b" font-size="8.8" font-family="{FONT_FAMILY}" font-weight="700">{commits_30d} FRAMES ({throughput} req/d)</text>
     </g>
 
     <!-- Right HUD: Network Topology Spec -->
     <g transform="translate(636, 22)">
-        <rect width="220" height="96" rx="6" fill="#0f172a" fill-opacity="0.9" stroke="#334155" stroke-width="1.2"/>
-        <text x="14" y="21" fill="#f8fafc" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="700">
+        <rect width="220" height="96" rx="6" fill="#0f172a" fill-opacity="0.92" stroke="#334155" stroke-width="1.2"/>
+        <text x="14" y="21" fill="#f8fafc" font-size="10.5" font-family="{FONT_FAMILY}" font-weight="700">
             TOPOLOGY SPECS
         </text>
         <line x1="12" y1="32" x2="208" y2="32" stroke="#1e293b" stroke-width="1"/>
-        <text x="14" y="48" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">ARCHITECTURE:</text>
-        <text x="110" y="48" fill="#a855f7" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">BGP TCP MESH</text>
-        <text x="14" y="64" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">PACKET LOSS:</text>
-        <text x="110" y="64" fill="#22c55e" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">0.0% [LOSSLESS]</text>
-        <text x="14" y="80" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">LINK LATENCY:</text>
-        <text x="110" y="80" fill="#38bdf8" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">12ms (PING RTT)</text>
+        <text x="14" y="48" fill="#64748b" font-size="8.8" font-family="{FONT_FAMILY}">ARCHITECTURE:</text>
+        <text x="110" y="48" fill="#a855f7" font-size="8.8" font-family="{FONT_FAMILY}" font-weight="700">BGP TCP MESH</text>
+        <text x="14" y="64" fill="#64748b" font-size="8.8" font-family="{FONT_FAMILY}">PACKET LOSS:</text>
+        <text x="110" y="64" fill="#22c55e" font-size="8.8" font-family="{FONT_FAMILY}" font-weight="700">0.0% [LOSSLESS]</text>
+        <text x="14" y="80" fill="#64748b" font-size="8.8" font-family="{FONT_FAMILY}">LINK LATENCY:</text>
+        <text x="110" y="80" fill="#38bdf8" font-size="8.8" font-family="{FONT_FAMILY}" font-weight="700">12ms (PING RTT)</text>
     </g>
     """
 

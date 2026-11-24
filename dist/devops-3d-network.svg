@@ -53,8 +53,8 @@
     <!-- Core Router Label -->
     
     <g transform="translate(440, 304)">
-        <rect x="-68" y="-12" width="136" height="24" rx="4" fill="#0369a1" fill-opacity="0.92" stroke="#38bdf8" stroke-width="1.3" filter="url(#glow-cyan)"/>
-        <text x="0" y="4" fill="#ffffff" font-size="9.5" font-family="'JetBrains Mono', monospace" font-weight="700" text-anchor="middle">
+        <rect x="-72" y="-12" width="144" height="24" rx="4" fill="#0369a1" fill-opacity="0.92" stroke="#38bdf8" stroke-width="1.3" filter="url(#glow-cyan)"/>
+        <text x="0" y="4" fill="#ffffff" font-size="9.5" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700" text-anchor="middle">
             CORE ROUTER [BGP-01]
         </text>
     </g>
@@ -64,56 +64,56 @@
     <g id="node-labels">
         
         <g transform="translate(440.0, 164.0)">
-            <rect x="-56" y="-11" width="112" height="22" rx="4" fill="#0b0f17" fill-opacity="0.9" stroke="#f1e05a" stroke-width="0.9"/>
-            <circle cx="-45" cy="0" r="3" fill="#f1e05a"/>
-            <text x="-36" y="3.5" fill="#f8fafc" font-size="8.8" font-family="'JetBrains Mono', 'Fira Code', Consolas, monospace" font-weight="700">
-                ETH0: JAVASCRIP
+            <rect x="-64" y="-11" width="128" height="22" rx="4" fill="#0b0f17" fill-opacity="0.92" stroke="#f1e05a" stroke-width="0.9"/>
+            <circle cx="-52" cy="0" r="3" fill="#f1e05a"/>
+            <text x="-43" y="3.5" fill="#f8fafc" font-size="8.5" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">
+                ETH0: JAVASCRIPT
             </text>
-            <text x="47" y="3.5" fill="#38bdf8" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="600" text-anchor="end">
-                33.0%
+            <text x="54" y="3.5" fill="#38bdf8" font-size="8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="600" text-anchor="end">
+                32.8%
             </text>
         </g>
         
         <g transform="translate(658.7, 253.8)">
-            <rect x="-56" y="-11" width="112" height="22" rx="4" fill="#0b0f17" fill-opacity="0.9" stroke="#555555" stroke-width="0.9"/>
-            <circle cx="-45" cy="0" r="3" fill="#555555"/>
-            <text x="-36" y="3.5" fill="#f8fafc" font-size="8.8" font-family="'JetBrains Mono', 'Fira Code', Consolas, monospace" font-weight="700">
+            <rect x="-64" y="-11" width="128" height="22" rx="4" fill="#0b0f17" fill-opacity="0.92" stroke="#555555" stroke-width="0.9"/>
+            <circle cx="-52" cy="0" r="3" fill="#555555"/>
+            <text x="-43" y="3.5" fill="#f8fafc" font-size="8.5" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">
                 ETH1: C
             </text>
-            <text x="47" y="3.5" fill="#38bdf8" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="600" text-anchor="end">
-                30.9%
+            <text x="54" y="3.5" fill="#38bdf8" font-size="8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="600" text-anchor="end">
+                30.7%
             </text>
         </g>
         
         <g transform="translate(575.2, 399.2)">
-            <rect x="-56" y="-11" width="112" height="22" rx="4" fill="#0b0f17" fill-opacity="0.9" stroke="#3178c6" stroke-width="0.9"/>
-            <circle cx="-45" cy="0" r="3" fill="#3178c6"/>
-            <text x="-36" y="3.5" fill="#f8fafc" font-size="8.8" font-family="'JetBrains Mono', 'Fira Code', Consolas, monospace" font-weight="700">
-                ETH2: TYPESCRIP
+            <rect x="-64" y="-11" width="128" height="22" rx="4" fill="#0b0f17" fill-opacity="0.92" stroke="#3178c6" stroke-width="0.9"/>
+            <circle cx="-52" cy="0" r="3" fill="#3178c6"/>
+            <text x="-43" y="3.5" fill="#f8fafc" font-size="8.5" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">
+                ETH2: TYPESCRIPT
             </text>
-            <text x="47" y="3.5" fill="#38bdf8" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="600" text-anchor="end">
-                18.5%
+            <text x="54" y="3.5" fill="#38bdf8" font-size="8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="600" text-anchor="end">
+                18.9%
             </text>
         </g>
         
         <g transform="translate(304.8, 399.2)">
-            <rect x="-56" y="-11" width="112" height="22" rx="4" fill="#0b0f17" fill-opacity="0.9" stroke="#3572A5" stroke-width="0.9"/>
-            <circle cx="-45" cy="0" r="3" fill="#3572A5"/>
-            <text x="-36" y="3.5" fill="#f8fafc" font-size="8.8" font-family="'JetBrains Mono', 'Fira Code', Consolas, monospace" font-weight="700">
+            <rect x="-64" y="-11" width="128" height="22" rx="4" fill="#0b0f17" fill-opacity="0.92" stroke="#3572A5" stroke-width="0.9"/>
+            <circle cx="-52" cy="0" r="3" fill="#3572A5"/>
+            <text x="-43" y="3.5" fill="#f8fafc" font-size="8.5" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">
                 ETH3: PYTHON
             </text>
-            <text x="47" y="3.5" fill="#38bdf8" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="600" text-anchor="end">
+            <text x="54" y="3.5" fill="#38bdf8" font-size="8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="600" text-anchor="end">
                 10.1%
             </text>
         </g>
         
         <g transform="translate(221.3, 253.8)">
-            <rect x="-56" y="-11" width="112" height="22" rx="4" fill="#0b0f17" fill-opacity="0.9" stroke="#00ADD8" stroke-width="0.9"/>
-            <circle cx="-45" cy="0" r="3" fill="#00ADD8"/>
-            <text x="-36" y="3.5" fill="#f8fafc" font-size="8.8" font-family="'JetBrains Mono', 'Fira Code', Consolas, monospace" font-weight="700">
+            <rect x="-64" y="-11" width="128" height="22" rx="4" fill="#0b0f17" fill-opacity="0.92" stroke="#00ADD8" stroke-width="0.9"/>
+            <circle cx="-52" cy="0" r="3" fill="#00ADD8"/>
+            <text x="-43" y="3.5" fill="#f8fafc" font-size="8.5" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">
                 ETH4: GO
             </text>
-            <text x="47" y="3.5" fill="#38bdf8" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="600" text-anchor="end">
+            <text x="54" y="3.5" fill="#38bdf8" font-size="8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="600" text-anchor="end">
                 7.5%
             </text>
         </g>
@@ -164,35 +164,35 @@
     
     <!-- Left HUD: NOC Telemetry -->
     <g transform="translate(24, 22)">
-        <rect width="290" height="96" rx="6" fill="#0f172a" fill-opacity="0.9" stroke="#334155" stroke-width="1.2"/>
+        <rect width="290" height="96" rx="6" fill="#0f172a" fill-opacity="0.92" stroke="#334155" stroke-width="1.2"/>
         <circle cx="16" cy="18" r="4.5" fill="#22c55e">
             <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
         </circle>
-        <text x="28" y="21.5" fill="#f8fafc" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="700">
+        <text x="28" y="21.5" fill="#f8fafc" font-size="10.5" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">
             NOC TELEMETRY // GATEWAY ONLINE
         </text>
         <line x1="12" y1="32" x2="278" y2="32" stroke="#1e293b" stroke-width="1"/>
-        <text x="14" y="48" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">NET OPERATOR:</text>
-        <text x="135" y="48" fill="#38bdf8" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">@quoczai22 [ADMIN]</text>
-        <text x="14" y="64" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">7D COMMITS (RX):</text>
-        <text x="135" y="64" fill="#22c55e" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">249 PKTS [ACK 100%]</text>
-        <text x="14" y="80" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">30D BANDWIDTH:</text>
-        <text x="135" y="80" fill="#f59e0b" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">340 FRAMES (11.3 req/d)</text>
+        <text x="14" y="48" fill="#64748b" font-size="8.8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace">NET OPERATOR:</text>
+        <text x="135" y="48" fill="#38bdf8" font-size="8.8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">@quoczai22 [ADMIN]</text>
+        <text x="14" y="64" fill="#64748b" font-size="8.8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace">7D COMMITS (RX):</text>
+        <text x="135" y="64" fill="#22c55e" font-size="8.8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">250 PKTS [ACK 100%]</text>
+        <text x="14" y="80" fill="#64748b" font-size="8.8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace">30D BANDWIDTH:</text>
+        <text x="135" y="80" fill="#f59e0b" font-size="8.8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">341 FRAMES (11.4 req/d)</text>
     </g>
 
     <!-- Right HUD: Network Topology Spec -->
     <g transform="translate(636, 22)">
-        <rect width="220" height="96" rx="6" fill="#0f172a" fill-opacity="0.9" stroke="#334155" stroke-width="1.2"/>
-        <text x="14" y="21" fill="#f8fafc" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="700">
+        <rect width="220" height="96" rx="6" fill="#0f172a" fill-opacity="0.92" stroke="#334155" stroke-width="1.2"/>
+        <text x="14" y="21" fill="#f8fafc" font-size="10.5" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">
             TOPOLOGY SPECS
         </text>
         <line x1="12" y1="32" x2="208" y2="32" stroke="#1e293b" stroke-width="1"/>
-        <text x="14" y="48" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">ARCHITECTURE:</text>
-        <text x="110" y="48" fill="#a855f7" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">BGP TCP MESH</text>
-        <text x="14" y="64" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">PACKET LOSS:</text>
-        <text x="110" y="64" fill="#22c55e" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">0.0% [LOSSLESS]</text>
-        <text x="14" y="80" fill="#64748b" font-size="8.8" font-family="'JetBrains Mono', monospace">LINK LATENCY:</text>
-        <text x="110" y="80" fill="#38bdf8" font-size="8.8" font-family="'JetBrains Mono', monospace" font-weight="700">12ms (PING RTT)</text>
+        <text x="14" y="48" fill="#64748b" font-size="8.8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace">ARCHITECTURE:</text>
+        <text x="110" y="48" fill="#a855f7" font-size="8.8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">BGP TCP MESH</text>
+        <text x="14" y="64" fill="#64748b" font-size="8.8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace">PACKET LOSS:</text>
+        <text x="110" y="64" fill="#22c55e" font-size="8.8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">0.0% [LOSSLESS]</text>
+        <text x="14" y="80" fill="#64748b" font-size="8.8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace">LINK LATENCY:</text>
+        <text x="110" y="80" fill="#38bdf8" font-size="8.8" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">12ms (PING RTT)</text>
     </g>
     
 </svg>
