@@ -31,11 +31,10 @@ jobs:
         run: |
           python generate_devops_3d.py
 
-      - name: Deploy to Output Branch
-        uses: crazy-max/ghaction-github-pages@v3
-        with:
-          target_branch: output
-          build_dir: dist
-          keep_history: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit & Push to Main
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add dist/devops-3d-network.svg
+          git commit -m "chore(auto): update 3D DevOps network graph [skip ci]" || exit 0
+          git push
