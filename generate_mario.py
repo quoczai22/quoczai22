@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 Ultimate Mario GitHub Contribution Graph Generator.
-Mario parkours across your real 52-week contribution blocks, collects coins,
-eats 1-UP Mushrooms, slides down the flagpole, and enters the castle with LEVEL CLEAR!
+Mario literally consumes and eats your real 52-week contribution blocks!
+Every green commit block gets eaten, flashing and turning empty as Mario
+parkours across your coding history, collecting coins and 1-UP mushrooms!
 Pure Python standard library implementation.
 """
 
@@ -29,7 +30,7 @@ def fetch_contributions(username, token):
     }
     """
     if not token:
-        return generate_fallback_weeks()
+        return generate_fallback_weeks(), 1250
 
     req = urllib.request.Request(
         'https://api.github.com/graphql',
@@ -39,10 +40,11 @@ def fetch_contributions(username, token):
     try:
         with urllib.request.urlopen(req, timeout=12) as response:
             data = json.loads(response.read().decode())
-            return data['data']['user']['contributionsCollection']['contributionCalendar']['weeks']
+            cal = data['data']['user']['contributionsCollection']['contributionCalendar']
+            return cal['weeks'], cal.get('totalContributions', 1566)
     except Exception as e:
         print(f"Error fetching data from GitHub API: {e}. Using fallback calendar.")
-        return generate_fallback_weeks()
+        return generate_fallback_weeks(), 1250
 
 
 def generate_fallback_weeks():
@@ -80,7 +82,7 @@ def generate_mario_github_svg(filename="mario_contribution.svg"):
     username = os.environ.get("GITHUB_ACTOR", os.environ.get("GITHUB_USERNAME", "quoczai22"))
     token = os.environ.get("GITHUB_TOKEN")
 
-    weeks_data = fetch_contributions(username, token)
+    weeks_data, total_commits = fetch_contributions(username, token)
 
     # --- LEVEL SETTINGS ---
     cell_size = 10
@@ -107,12 +109,19 @@ def generate_mario_github_svg(filename="mario_contribution.svg"):
         'FOURTH_QUARTILE': 'lvl4'
     }
 
+    color_map = {
+        'lvl1': '#0e4429',
+        'lvl2': '#006d32',
+        'lvl3': '#26a641',
+        'lvl4': '#39d353'
+    }
+
     # SVG Wrapper
     svg_elements = [
         f'<svg width="{width}" height="{height}" viewBox="0 0 {width} {height}" xmlns="http://www.w3.org/2000/svg">',
         '  <style>',
         '    .bg { fill: #87CEEB; }',
-        '    .empty { fill: rgba(255,255,255,0.2); rx: 2; ry: 2; }',
+        '    .empty { fill: rgba(255,255,255,0.22); rx: 2; ry: 2; }',
         '    .lvl1 { fill: #0e4429; rx: 2; ry: 2; stroke: #000; stroke-width: 0.5; }',
         '    .lvl2 { fill: #006d32; rx: 2; ry: 2; stroke: #000; stroke-width: 0.5; }',
         '    .lvl3 { fill: #26a641; rx: 2; ry: 2; stroke: #000; stroke-width: 0.5; }',
@@ -177,26 +186,47 @@ def generate_mario_github_svg(filename="mario_contribution.svg"):
     coins_to_draw = []
     mushroom_item = None
 
-    # Process Grid
+    # Process Grid: Every green commit block is an edible target!
     for col, week in enumerate(weeks_data):
         highest_block_row = rows
         col_x = grid_x_offset + col * step
         is_empty_week = True
 
+        t_col = (col_x - pipe_x) / total_travel_distance
+        t_hit = max(0.0, min(0.95, t_col))
+        t_flash = min(0.96, t_hit + 0.008)
+        t_eaten = min(0.97, t_hit + 0.022)
+
         for row, day in enumerate(week['contributionDays']):
             lvl = level_map.get(day.get('contributionLevel', 'NONE'), 'empty')
             block_y = top_padding + row * step
 
-            svg_elements.append(f'  <rect x="{col_x}" y="{block_y}" width="{cell_size}" height="{cell_size}" class="{lvl}" />')
-
-            if lvl != 'empty':
+            if lvl == 'empty':
+                # Empty slot
+                svg_elements.append(f'  <rect x="{col_x}" y="{block_y}" width="{cell_size}" height="{cell_size}" class="{lvl}" />')
+            else:
                 is_empty_week = False
                 if row < highest_block_row:
                     highest_block_row = row
 
-            # Level 4 Coin
-            if lvl == 'lvl4':
-                coins_to_draw.append({'x': col_x, 'y': block_y - 12, 't': (col_x - pipe_x) / total_travel_distance})
+                orig_color = color_map.get(lvl, '#26a641')
+
+                # MARIO EATS THIS COMMIT BLOCK:
+                # Green -> Mario hits it -> Flashes white -> Becomes consumed empty slot!
+                svg_elements.append(f'''  <rect x="{col_x}" y="{block_y}" width="{cell_size}" height="{cell_size}" class="{lvl}">
+    <animate attributeName="fill"
+             values="{orig_color}; {orig_color}; #ffffff; rgba(255,255,255,0.22); rgba(255,255,255,0.22); {orig_color}"
+             keyTimes="0; {t_hit:.3f}; {t_flash:.3f}; {t_eaten:.3f}; 0.98; 1"
+             dur="20s" repeatCount="indefinite" />
+  </rect>''')
+
+        # When Mario stomps/eats this week's commits, a coin pops out!
+        if not is_empty_week:
+            coins_to_draw.append({
+                'x': col_x,
+                'y': top_padding + highest_block_row * step - 12,
+                't': t_hit
+            })
 
         # Spawn a 1-UP Mushroom at mid-stage (approx week 24-28)
         if not mushroom_item and 22 <= col <= 30 and not is_empty_week:
@@ -204,7 +234,7 @@ def generate_mario_github_svg(filename="mario_contribution.svg"):
             mushroom_item = {
                 'x': col_x,
                 'y': mushroom_y,
-                't': (col_x - pipe_x) / total_travel_distance
+                't': t_hit
             }
 
         # Gap Logic
@@ -218,7 +248,7 @@ def generate_mario_github_svg(filename="mario_contribution.svg"):
         # If huge gap (4 weeks), jump for a coin!
         if empty_streak == 4:
             target_y -= 25
-            coins_to_draw.append({'x': col_x, 'y': target_y - 4, 't': (col_x - pipe_x) / total_travel_distance})
+            coins_to_draw.append({'x': col_x, 'y': target_y - 4, 't': t_hit})
             empty_streak = 0
 
         if target_y != current_y:
@@ -234,24 +264,23 @@ def generate_mario_github_svg(filename="mario_contribution.svg"):
     path_d += f" L {flag_x - 4} {ground_y - mario_height} "
     path_d += f" L {castle_x + 15} {ground_y - mario_height} "
 
-    # DRAW COINS (Collected by Mario!)
+    # DRAW COINS (Popping when commits are eaten by Mario!)
     for c in coins_to_draw:
         t, t_end = c['t'], min(1.0, c['t'] + 0.03)
         svg_elements.append(f'  <g transform="translate({c["x"]}, {c["y"]})">')
         svg_elements.append(f'    <g>')
         svg_elements.append(f'      <animateTransform attributeName="transform" type="translate" values="0,0; 0,0; 0,-20; 0,-20" keyTimes="0;{t:.3f};{t_end:.3f};1" dur="20s" repeatCount="indefinite" />')
-        svg_elements.append(f'      <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;{t:.3f};{t_end:.3f};1" dur="20s" repeatCount="indefinite" />')
+        svg_elements.append(f'      <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;{t:.3f};{t + 0.005:.3f};{t_end:.3f};1" dur="20s" repeatCount="indefinite" />')
         svg_elements.append(f'      <use href="#coin" x="0" y="0" />')
         svg_elements.append(f'    </g>')
         svg_elements.append(f'  </g>')
 
-    # DRAW 1-UP MUSHROOM (Collected by Mario!)
+    # DRAW 1-UP MUSHROOM (Eaten by Mario on the commits!)
     if mushroom_item:
         mt = mushroom_item['t']
         mt_end = min(1.0, mt + 0.04)
         svg_elements.append(f'  <g transform="translate({mushroom_item["x"]}, {mushroom_item["y"]})">')
         svg_elements.append(f'    <g>')
-        # Mushroom pops up and gives 1-UP when Mario arrives!
         svg_elements.append(f'      <animateTransform attributeName="transform" type="translate" values="0,0; 0,0; 0,-18; 0,-18" keyTimes="0;{mt:.3f};{mt_end:.3f};1" dur="20s" repeatCount="indefinite" />')
         svg_elements.append(f'      <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;{mt:.3f};{mt_end:.3f};1" dur="20s" repeatCount="indefinite" />')
         svg_elements.append(f'      <use href="#mushroom" x="0" y="0" />')
@@ -278,13 +307,13 @@ def generate_mario_github_svg(filename="mario_contribution.svg"):
     svg_elements.append(f'    <animateMotion dur="20s" repeatCount="indefinite"><mpath href="#parkour-path"/></animateMotion>')
     svg_elements.append('  </use>')
 
-    # FOREGROUND CASTLE (Drawn AFTER Mario to hide him inside the door)
+    # FOREGROUND CASTLE
     castle_y = ground_y - 40
     svg_elements.append('  <!-- Castle Foreground -->')
     svg_elements.append(f'  <path d="M {castle_x} {ground_y} L {castle_x} {castle_y} L {castle_x+10} {castle_y} L {castle_x+10} {castle_y+10} L {castle_x+20} {castle_y+10} L {castle_x+20} {castle_y} L {castle_x+30} {castle_y} L {castle_x+30} {castle_y+10} L {castle_x+40} {castle_y+10} L {castle_x+40} {castle_y} L {castle_x+50} {castle_y} L {castle_x+50} {ground_y} Z" fill="#c84c0c" stroke="#000" stroke-width="1" />')
     svg_elements.append(f'  <path d="M {castle_x+15} {ground_y} L {castle_x+15} {ground_y-20} A 10 10 0 0 1 {castle_x+35} {ground_y-20} L {castle_x+35} {ground_y} Z" fill="#000" />')
 
-    # LEVEL CLEAR TEXT (Flashes after flag goes down)
+    # LEVEL CLEAR TEXT
     svg_elements.append(f'  <text x="{flag_x - 70}" y="{top_padding - 10}" fill="#f8d820" font-family="monospace" font-weight="bold" font-size="16" stroke="#000" stroke-width="1" opacity="0">')
     svg_elements.append(f'    LEVEL CLEAR!')
     svg_elements.append(f'    <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;{t_flag_end:.3f};{t_flag_end+0.01:.3f};0.98;1" dur="20s" repeatCount="indefinite" />')
@@ -296,7 +325,7 @@ def generate_mario_github_svg(filename="mario_contribution.svg"):
     svg_elements.append(f'    <text x="0" y="0" fill="#FFFFFF" font-family="monospace" font-weight="bold" font-size="12" stroke="#000" stroke-width="0.8">MARIO</text>')
     svg_elements.append(f'    <text x="140" y="0" fill="#FFFFFF" font-family="monospace" font-weight="bold" font-size="12" stroke="#000" stroke-width="0.8">@{username.upper()}</text>')
     svg_elements.append(f'    <text x="400" y="0" fill="#f8d820" font-family="monospace" font-weight="bold" font-size="12" stroke="#000" stroke-width="0.8">WORLD 1-1</text>')
-    svg_elements.append(f'    <text x="600" y="0" fill="#FFFFFF" font-family="monospace" font-weight="bold" font-size="12" stroke="#000" stroke-width="0.8">COINS x {len(coins_to_draw)}</text>')
+    svg_elements.append(f'    <text x="600" y="0" fill="#FFFFFF" font-family="monospace" font-weight="bold" font-size="12" stroke="#000" stroke-width="0.8">COMMITS EATEN: {total_commits:,}</text>')
     svg_elements.append(f'  </g>')
 
     svg_elements.append('</svg>')
