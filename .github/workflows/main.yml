@@ -1,16 +1,12 @@
-name: Generate Mario Contribution Graph
+name: GitHub-Profile-3D-Contrib
 
 on:
   schedule:
-    # Runs daily at midnight UTC (and every 12 hours)
-    - cron: "0 */12 * * *"
-  workflow_dispatch:
+    - cron: "0 18 * * *" # Tự động cập nhật mỗi ngày vào 1h sáng (giờ VN)
+  workflow_dispatch: # Cho phép bấm chạy thủ công trong tab Actions
   push:
     branches:
       - main
-    paths:
-      - "generate_mario.py"
-      - ".github/workflows/main.yml"
 
 permissions:
   contents: write
@@ -18,26 +14,21 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: generate-github-profile-3d-contrib
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Generate Mario Contribution SVG
+      - name: Generate 3D SVG
+        uses: yoshi389111/github-profile-3d-contrib@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ github.repository_owner }}
-        run: |
-          python generate_mario.py
+          USERNAME: quoczai22
 
-      - name: Push SVG to Main
+      - name: Commit & Push
         run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add mario_contribution.svg
-          if git commit -m "🎮 [Level Clear]: Mario completed contribution parkour [skip ci]"; then
-            git pull --rebase origin main
-            git push
-          fi
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add -A .
+          git commit -m "Update 3D contribution graph" || exit 0
+          git push
