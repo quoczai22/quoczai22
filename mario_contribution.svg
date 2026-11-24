@@ -452,7 +452,7 @@
   <rect x="306" y="82" width="10" height="10" class="lvl1" />
   <rect x="306" y="96" width="10" height="10" class="empty" />
   <rect x="306" y="110" width="10" height="10" class="empty" />
-  <rect x="306" y="124" width="10" height="10" class="empty" />
+  <rect x="306" y="124" width="10" height="10" class="lvl1" />
   <rect x="320" y="40" width="10" height="10" class="lvl1" />
   <rect x="320" y="54" width="10" height="10" class="empty" />
   <rect x="320" y="68" width="10" height="10" class="lvl1" />
@@ -512,7 +512,7 @@
   <rect x="432" y="40" width="10" height="10" class="empty" />
   <rect x="432" y="54" width="10" height="10" class="lvl1" />
   <rect x="432" y="68" width="10" height="10" class="lvl1" />
-  <rect x="432" y="82" width="10" height="10" class="lvl1" />
+  <rect x="432" y="82" width="10" height="10" class="empty" />
   <rect x="432" y="96" width="10" height="10" class="lvl1" />
   <rect x="432" y="110" width="10" height="10" class="lvl1" />
   <rect x="432" y="124" width="10" height="10" class="empty" />
@@ -565,7 +565,7 @@
   <rect x="530" y="96" width="10" height="10" class="lvl1" />
   <rect x="530" y="110" width="10" height="10" class="empty" />
   <rect x="530" y="124" width="10" height="10" class="lvl1" />
-  <rect x="544" y="40" width="10" height="10" class="lvl2" />
+  <rect x="544" y="40" width="10" height="10" class="lvl1" />
   <rect x="544" y="54" width="10" height="10" class="lvl4" />
   <rect x="544" y="68" width="10" height="10" class="empty" />
   <rect x="544" y="82" width="10" height="10" class="lvl1" />
@@ -590,7 +590,7 @@
   <rect x="586" y="54" width="10" height="10" class="lvl1" />
   <rect x="586" y="68" width="10" height="10" class="empty" />
   <rect x="586" y="82" width="10" height="10" class="empty" />
-  <rect x="586" y="96" width="10" height="10" class="empty" />
+  <rect x="586" y="96" width="10" height="10" class="lvl1" />
   <rect x="586" y="110" width="10" height="10" class="lvl2" />
   <rect x="586" y="124" width="10" height="10" class="lvl1" />
   <rect x="600" y="40" width="10" height="10" class="lvl1" />
