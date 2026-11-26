@@ -1587,13 +1587,13 @@
       animation-name: kf_c153;
     }
     @keyframes kf_c154 {
-      0% { fill: var(--c1); }
-      43.92% { fill: var(--c1); }
+      0% { fill: var(--c2); }
+      43.92% { fill: var(--c2); }
       44.02% { fill: var(--ce); }
       100% { fill: var(--ce); }
     }
     .c154 {
-      fill: var(--c1);
+      fill: var(--c2);
       animation-name: kf_c154;
     }@keyframes marioMove {
   0.00% { transform: translate(-3px, -3px); }
@@ -2730,7 +2730,7 @@
       100% { opacity: 1; transform: scaleY(1); }
     }
     .u79 {
-      fill: var(--c1);
+      fill: var(--c2);
       transform-origin: 432.2px 156px;
       animation-name: kf_u79;
     }
